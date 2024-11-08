@@ -1,5 +1,5 @@
 # DataLabeler
-NETS 2130 final project
+NETS 2130 Final Project
 
 
 # Data Labeler: Dense Captioning Crowdsourcing Platform
@@ -11,6 +11,8 @@ Upon successful submission of the audio description, the worker receives a uniqu
 ## Project Flow Diagram
 
 ![Flow Diagram](./flowchart.png)
+
+(UI mockup can be found ![here](./mockup.pdf)
 
 ## Major Components and Milestones
 
