@@ -10,7 +10,7 @@ Upon successful submission of the audio description, the worker receives a uniqu
 
 ## Project Flow Diagram
 
-![Flow Diagram](./docs/flowchart.png)
+![Flow Diagram](./flowchart.png)
 
 ## Major Components and Milestones
 
