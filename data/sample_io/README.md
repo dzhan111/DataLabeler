@@ -17,7 +17,11 @@ Sample input:
 [Third image](./image3.jpg)
 
 Sample output:
+
+Sample input:
 [Fourth image](./image4.jpg)
+
+Sample output:
 
 # Aggregation Sample I/O
 ## Explanation:
@@ -25,13 +29,22 @@ The aggregation module takes in n transcriptions and outputs a summarized dense 
 
 ## Sample I/O:
 Sample input:
+[First image](./image1.jpg)
 
 Sample output:
 
 Sample input:
+[Second image](./image2.jpg)
 
 Sample output:
 
 Sample input:
+[Third image](./image3.jpg)
 
 Sample output:
+
+Sample input:
+[Fourth image](./image4.jpg)
+
+Sample output:
+
