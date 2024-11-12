@@ -1,3 +1,0 @@
-Sample input:
-
-Sample output:
