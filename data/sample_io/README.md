@@ -4,6 +4,7 @@ The quality control module consists of two phases: the first is feeding a multim
 
 ## Sample I/O:
 Sample input:
+[First image](./image1.png)
 
 Sample output:
 
