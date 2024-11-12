@@ -19,7 +19,12 @@ The aggregation module takes in n transcriptions and outputs a summarized dense 
 
 **Sample QC output:**
 1. Keywords:
-2. Given a transcription of <`TRANSCRIPTION`>, it contains X out of Y keywords (and Z total words), so the model would output <`YES/NO`> and therefore <`PASS/FAIL`> the quality control test.
+   
+2.a. Transcription 1 contains X out of Y keywords (and Z total words), so the model would output <`YES/NO`> and therefore <`PASS/FAIL`> the quality control test.
+
+2.b. Transcription 2 contains X out of Y keywords (and Z total words), so the model would output <`YES/NO`> and therefore <`PASS/FAIL`> the quality control test.
+
+2.c. Transcription 3 contains X out of Y keywords (and Z total words), so the model would output <`YES/NO`> and therefore <`PASS/FAIL`> the quality control test.
 
 **Sample aggregation output:**
 
@@ -36,7 +41,12 @@ The aggregation module takes in n transcriptions and outputs a summarized dense 
 
 **Sample QC output:**
 1. Keywords: `Wheat, Woman, Stick, Blouse, Blue, Skyscrapers, Skirt, Buildings, Manhattan, Field`
-2. Given a transcription of "We can see a woman standing in the middle of a golden wheat field, holding a tall wooden stick, surrounded by the vibrant stalks of grain. She is wearing a blue skirt and a white blouse. Towering skyscrapers appear behind her, creating a contrast between the natural, rural landscape of the field and the industrial, urban skyline. The scene feels surreal, as if a slice of farmland has been transplanted into the heart of a bustling city, merging two worlds that are rarely seen together so closely.", it contains 8 out of 10 keywords (and 87 total words), so the model would output `YES` and therefore pass the quality control test.
+
+2.a. Transcription 1 contains 7 out of 10 keywords (and 97 total words), so the model would output `YES` and therefore pass the quality control test.
+  
+2.b. Transcription 2 contains 7 out of 10 keywords (and 139 total words), so the model would output `YES` and therefore pass the quality control test.
+  
+2.c. Transcription 3 contains 7 out of 10 keywords (and 177 total words), so the model would output `YES` and therefore pass the quality control test.
 
 **Sample aggregation output:**
 
@@ -56,7 +66,12 @@ The aggregation module takes in n transcriptions and outputs a summarized dense 
 
 **Sample QC output:**
 1. Keywords:
-2. Given a transcription of <`TRANSCRIPTION`>, it contains X out of Y keywords (and Z total words), so the model would output <`YES/NO`> and therefore <`PASS/FAIL`> the quality control test.
+   
+2.a. Transcription 1 contains X out of Y keywords (and Z total words), so the model would output <`YES/NO`> and therefore <`PASS/FAIL`> the quality control test.
+
+2.b. Transcription 2 contains X out of Y keywords (and Z total words), so the model would output <`YES/NO`> and therefore <`PASS/FAIL`> the quality control test.
+
+2.c. Transcription 3 contains X out of Y keywords (and Z total words), so the model would output <`YES/NO`> and therefore <`PASS/FAIL`> the quality control test.
 
 **Sample aggregation output:**
 
@@ -73,7 +88,12 @@ The aggregation module takes in n transcriptions and outputs a summarized dense 
 
 **Sample QC output:**
 1. Keywords:
-2. Given a transcription of <`TRANSCRIPTION`>, it contains X out of Y keywords (and Z total words), so the model would output <`YES/NO`> and therefore <`PASS/FAIL`> the quality control test.
+   
+2.a. Transcription 1 contains X out of Y keywords (and Z total words), so the model would output <`YES/NO`> and therefore <`PASS/FAIL`> the quality control test.
+
+2.b. Transcription 2 contains X out of Y keywords (and Z total words), so the model would output <`YES/NO`> and therefore <`PASS/FAIL`> the quality control test.
+
+2.c. Transcription 3 contains X out of Y keywords (and Z total words), so the model would output <`YES/NO`> and therefore <`PASS/FAIL`> the quality control test.
 
 **Sample aggregation output:**
 
