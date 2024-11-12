@@ -4,17 +4,20 @@ The quality control module consists of two phases: the first is feeding a multim
 
 ## Sample I/O:
 Sample input:
-[First image](./image1.png)
+[First image](./image1.jpg)
 
 Sample output:
 
 Sample input:
+[Second image](./image2.jpg)
 
 Sample output:
 
 Sample input:
+[Third image](./image3.jpg)
 
 Sample output:
+[Fourth image](./image4.jpg)
 
 # Aggregation Sample I/O
 ## Explanation:
