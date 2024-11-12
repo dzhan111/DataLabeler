@@ -5,7 +5,7 @@ The quality control module consists of two phases: the first is feeding a multim
 ## Sample I/O:
 Sample input:
 
-[First image](./image1.jpg)
+[First image](./image1.jpeg)
 
 Sample output:
 
@@ -38,7 +38,7 @@ The aggregation module takes in n transcriptions and outputs a summarized dense 
 ## Sample I/O:
 Sample input:
 
-[First image](./image1.jpg)
+[First image](./image1.jpeg)
 
 Sample output:
 
