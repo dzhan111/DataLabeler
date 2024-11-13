@@ -82,21 +82,23 @@ There are two teams in the middle of a tackle, with the Black and Red team, prim
 
 ![Fourth image](./image4.jpg)
 
-*Transcription 1:* 
+*Transcription 1:* A woman is tending to flowers. She has a flower shop. Her flower shop has a a lot of different varieties of flowers, including pink flowers, red flowers, and yellow flowers. Some of these flowers may be tulips and others may be roses. She is leading over and she is wearing a blue towel on her neck with an apron in the front. She is also wearing pink gloves. On top of her shop, the roof has a bunch of fans and some vets. And she has a lot of light bulbs hanging from the roof for lighting the shop. In the background, there are some boxes and she is currently unloading a box into the display. The flowers are in buckets.
 
-*Transcription 2:* 
+*Transcription 2:* In this photo, we can see a flower shop. There is an almond taking care of the flowers, and she seems to be wearing a mask at all on her neck. I know I T-shirt. She is also wearing cringloves for the foolishness that she's getting to take care of the flowers. There seem to be flowers of all different color-shorts and types, including red flowers, blue flowers, green plants and yellow flowers. There seem to be air conditioning units on top of the shop, namely we can see five fans producing this. We can also see Chinese clip-treatment on one of the signs. The sign seems to be white and split as in red. There we can see at least five different sources of light of different shapes and sizes. We can also see some questions in the background. We can see the urban mind in that photo. There is also a small shop in the background, which seems to be a food stall that has a few chairs and a table.
 
-*Transcription 3:* 
+*Transcription 3:* This is a very beautiful image of a shopkeeper taking care of what seems to be a flower shop. There is many different vibrant pieces of floral flowers. The shopkeeper seems to be cutting some stems of roses and there's various different types of flowers from pink flowers to blue flowers to yellow flowers to green flowers. This picture is probably taking place in a city as evidenced by the many fans at the top of the image and the industrial look at the top of the image. There's a lot of detail in this image. This seems to be an Asian owner to the shop because there's a sign with some sort of characters. The shop doesn't seem to be very active. There's not that many customers. There's just a shopkeeper and perhaps the shopkeeper is opening up for the day.
 
 **Sample QC output:**
+
 1. Keywords:
-   
-2.a. Transcription 1 contains X out of Y keywords (and Z total words), so the model would output <`YES/NO`> and therefore <`PASS/FAIL`> the quality control test.
 
-2.b. Transcription 2 contains X out of Y keywords (and Z total words), so the model would output <`YES/NO`> and therefore <`PASS/FAIL`> the quality control test.
+2.a. Transcription 1 contains 4 out of 10 keywords (and 122 total words), so the model would output <`YES`> and therefore <`PASS`> the quality control test.
 
-2.c. Transcription 3 contains X out of Y keywords (and Z total words), so the model would output <`YES/NO`> and therefore <`PASS/FAIL`> the quality control test.
+2.b. Transcription 2 contains 3 out of 10 keywords (and 173 total words), so the model would output <`YES`> and therefore <`PASS`> the quality control test.
+
+2.c. Transcription 3 contains 2 out of 10 keywords (and 142 total words), so the model would output <`YES`> and therefore <`PASS`> the quality control test.
 
 **Sample aggregation output:**
+In a bustling city, a flower shop is bustling with activity. The owner, a woman, tends to a vibrant array of flowers, including pink roses, red tulips, yellow blooms, and lush green plants. Dressed in a blue scarf around her neck, a pink apron, and pink gloves to protect her hands, she expertly arranges the flowers in buckets. Above the shop, fans and vents provide a comfortable environment, while light bulbs hanging from the roof ensure the area is well-lit.
 
----
+In the background, boxes are stacked, and the owner is in the process of unloading one to replenish her display. A nearby food stall adds to the urban charm of the scene. The shop's sign, with its distinctive Chinese characters, hints at the owner's Asian heritage. As the shop prepares to open for the day, only a few customers are visible, allowing for a serene moment to capture the beauty of the flowers and the care of the owner.
