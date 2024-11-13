@@ -1,11 +1,11 @@
-**Data Labeler Project Directory**
+**DataLabeler Project Directory**
 ------------
 
 
 *[data/](/data)* 
 - 
 - **[dataset/](/data/dataset)** 
-    - a folder of 40 example images we intend to use as our dataset
+    - a folder of 43 example images we intend to use as our dataset
 - **[sample_io/](/data/sample_io)**
     - **[README.md](/data/sample_io/README.md)** : contains the sample aggregation inputs and outputs of our pipeline for 4 example images.
     - **[image1.jpeg](/data/sample_io/image1.jpeg)** : example input
