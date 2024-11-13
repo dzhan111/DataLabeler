@@ -29,7 +29,7 @@
       - Using a cheaper, open-source model: we want to explore using more affordable open-source models for keyword extraction and quality verification, such as Hugging Face's transformers or other lightweight models. This would hopefully reduce the dependency on costly API calls while maintaining performance.
       - Keyword and word count fine-tuning: we may fine-tune the pipeline by adjusting the number of required keywords (e.g., increasing the threshold to 3 keywords) and maybe extending the minimum word count to 90 words to better capture the quality of transcriptions.
 - **agg.py** : a simple working version of our aggregation pipeline
-    - we aggregate by using Cerebras...
+    - we aggregate by using Cerebras..
     - how we intend to improve it for our final version
 
 
