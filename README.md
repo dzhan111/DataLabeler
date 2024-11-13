@@ -33,7 +33,9 @@
     - To improve our final version, we may consider:
       - Model optimization: we can explore alternative models or more efficient versions, such as smaller or fine-tuned models, to balance quality and performance.
       - Additional inputs: We could incorporate metadata (e.g., keywords from QC or other relevant data) into the aggregation process, allowing the model to make more informed decisions about what to keep and what to not.
-
+- **routes.py** : the coordinator file that calls previous pipelines and serves images to the user
+    - Uses Whisper for Speech-to-Text
+    - Chooses a random image from the raw data to serve to the user
 
 
 
