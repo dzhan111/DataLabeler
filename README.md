@@ -29,8 +29,10 @@
       - Using a cheaper, open-source model: we want to explore using more affordable open-source models for keyword extraction and quality verification, such as Hugging Face's transformers or other lightweight models. This would hopefully reduce the dependency on costly API calls while maintaining performance.
       - Keyword and word count fine-tuning: we may fine-tune the pipeline by adjusting the number of required keywords (e.g., increasing the threshold to 3 keywords) and maybe extending the minimum word count to 90 words to better capture the quality of transcriptions.
 - **agg.py** : a simple working version of our aggregation pipeline
-    - we aggregate by using Cerebras..
-    - how we intend to improve it for our final version
+    - The aggergation module is designed to combine multiple image captions into a single, dense caption that encapsulates the core information from all inputs. The process involves taking three captions, processing them through a model, and creating a more concise and coherent summary using Cerebras.
+    - To improve our final version, we may consider:
+      - Model optimization: we can explore alternative models or more efficient versions, such as smaller or fine-tuned models, to balance quality and performance.
+      - Additional inputs: We could incorporate metadata (e.g., keywords from QC or other relevant data) into the aggregation process, allowing the model to make more informed decisions about what to keep and what to not.
 
 
 
