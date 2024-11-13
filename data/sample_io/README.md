@@ -3,7 +3,7 @@
 The quality control module consists of two phases: the first is feeding a multimodal the input image and making it generate keywords (labeled as 1. in the output), and the second is feeding these keywords plus the worker's transcription to an LLM, then that LLM decides if that fits the quality control standards (`YES/NO` depending on if it contains 2 out of the 10 keywords, but the exact number of keywords is subject to change later) (labeled as 2. in the output). The voice recording also has to contain 80 words at minimum after transcription.
 
 ## Aggregation Module Explanation:
-The aggregation module takes in n transcriptions and outputs a summarized dense caption.
+The aggregation module takes in 3 transcriptions and outputs a summarized dense caption.
 
 
 ## Sample I/O:
