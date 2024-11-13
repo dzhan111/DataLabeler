@@ -2,24 +2,24 @@
 ------------
 
 
-*data/* 
+*[data/](/data)* 
 - 
-- **dataset/** 
+- **[dataset/](/data/dataset)** 
     - a folder of 40 example images we intend to use as our dataset
-- **sample_io/**
-    - **README.md** : contains the sample aggregation inputs and outputs of our pipeline for 4 example images.
-    - **image1.png** : example input
-    - **image2.png** : example input
-    - **image3.png** : example input
-    - **image4.png** : example input 
+- **[sample_io/](/data/sample_io)**
+    - **[README.md](/data/sample_io/README.md)** : contains the sample aggregation inputs and outputs of our pipeline for 4 example images.
+    - **[image1.jpeg](/data/sample_io/image1.jpeg)** : example input
+    - **[image2.jpg](/data/sample_io/image2.jpg)** : example input
+    - **[image3.jpg](/data/sample_io/image3.jpg)** : example input
+    - **[image4.jpg](/data/sample_io/image4.jpg)** : example input
 
-*docs/*
+*[docs/](/docs)* 
 -
-- **flowdiagram.png** : flow diagram for our application pipeline 
-- **mockup.pdf** : example mockups for our 
-- **README.md** : Markdown file explaining the major components of our project. 
+- **[flowchart.png](/docs/flowdiagram.png)** : flow diagram for our application pipeline 
+- **[mockup.pdf](/docs/mockup.pdf)** : example mockups for our 
+- **[README.md](/docs/README.md)** : Markdown file explaining the major components of our project. 
 
-*src/*
+*[src/](/src)* 
 -
 - **qc.py** : a simple working version of our quality control pipeline
     - explanation of our qc methods
