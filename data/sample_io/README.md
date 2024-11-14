@@ -8,25 +8,25 @@ The aggregation module takes in 3 transcriptions and outputs a summarized dense 
 
 ## Sample I/O:
 **Sample input:**
-
 ![First image](./image1.jpeg)
 
-*Transcription 1:* 
+*Transcription 1:* "There is a man walking two dogs in a city park and it appears to be the middle of winter. One of the dogs is a small and black. The other one is a golden retriever. The person is wearing a grey hat and a scarf around. There knows a black coat, gloves and what appears to be snow pants. The city in the background is very consists of 10 buildings and there are park benches on the right side of the walkway. The ground is covered in snow and there is a pigeon standing in the middle of the walkway. The trees, there are trees in the background which all don't have leaves."
 
-*Transcription 2:* 
+*Transcription 2:* "A man is walking down a snowy path in a city. He is walking his two dogs. One of them is small and has a black coat, and the other one is larger and has a golden coat. It may be some sort of golden retriever. There is a pigeon also in the middle of the path, and there is another pigeon on the side near the benches. Along the path are a lot of benches that are all covered with snow. In the background there are trees and buildings, and two other people, along with some trash cans and lamp posts. The person is wearing a scarf, a hat, and a coat, and their feet are covered with snow. There are tall buildings in the background."
 
-*Transcription 3:* 
+*Transcription 3:* "And this image we can see why the street in what seems like to be a major city. There are about two inches of snow. We can see in the foreground a person wearing a scarf and walking two dogs, one of which is a bulletproof fever and a slug is in the other dog which is black and gay. There are two pigeons in the background and there seem to be two people for the living background. There are a lot of buildings in the photo, one of which is, has green color to it and the rest of the buildings seem to be beige and brown. There are a lot of trees but none of them have leaves. The weather seems to be overcast in that photo. There seems to be two flash bins and a bunch of benches with snow on them. There are two street lights that seem to be of all style in the photo."
 
 **Sample QC output:**
-1. Keywords:
+1. Keywords: `Snow, Bench, Person, Scarf, Dog, Leash, Buildings, Trees, Pigeons, Park`
    
-2.a. Transcription 1 contains X out of Y keywords (and Z total words), so the model would output <`YES/NO`> and therefore <`PASS/FAIL`> the quality control test.
+2.a. Transcription 1 contains 6 out of 10 keywords (and 114 total words), so the model would output <`YES`> and therefore <`PASS`> the quality control test.
 
-2.b. Transcription 2 contains X out of Y keywords (and Z total words), so the model would output <`YES/NO`> and therefore <`PASS/FAIL`> the quality control test.
+2.b. Transcription 2 contains 5 out of 10 keywords (and 127 total words), so the model would output <`YES`> and therefore <`PASS`> the quality control test.
 
-2.c. Transcription 3 contains X out of Y keywords (and Z total words), so the model would output <`YES/NO`> and therefore <`PASS/FAIL`> the quality control test.
+2.c. Transcription 3 contains 7 out of 10 keywords (and 160 total words), so the model would output <`YES`> and therefore <`PASS`> the quality control test.
 
 **Sample aggregation output:**
+"A man is walking his two dogs through the snowy city park in the middle of winter. One of the dogs is a small, black dog, while the other is a golden retriever. The person is dressed warmly, wearing a grey hat, a scarf, a black coat, gloves, and snow pants. A pigeon stands out in the middle of the walkway, and park benches along the right side are buried under a layer of snow. The city's backdrop features 10 beige and brown buildings, with a green-toned building among them. The tall trees, bare of leaves, loom behind the scene, along with a couple of people in the background, near the lamp posts, trash cans, and streetlights."
 
 ---
 **Sample input:**
