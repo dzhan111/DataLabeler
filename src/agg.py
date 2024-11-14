@@ -1,4 +1,4 @@
-from qc import QualityControl
+from src.qc import QualityControl
 import os
 from cerebras.cloud.sdk import Cerebras
 from typing import List

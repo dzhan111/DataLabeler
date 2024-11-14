@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from typing import Dict
 import os
 import random
-from agg import Aggregation
+from src.agg import Aggregation
 import whisper
 from PIL import Image
 from io import BytesIO
@@ -12,7 +12,7 @@ import base64
 app = FastAPI()
 
 # Initialize
-folder_path = '../data/dataset'
+folder_path = 'data/dataset'
 images = []
 whisper_model = whisper.load_model("base")
 transcriptions = {}
