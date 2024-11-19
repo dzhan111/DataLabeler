@@ -15,11 +15,9 @@ transcriptions = {}
 # Load images into Aggregation objects, convert them to .jpeg first if needed
 images = load_images('data/dataset')
 
-print(f"Loaded {len(images)} images.")
 class ImageResponse(BaseModel):
     index: int
     image_path: str
-
 
 @app.get("/generate_image", response_model=ImageResponse)
 async def generate_image():

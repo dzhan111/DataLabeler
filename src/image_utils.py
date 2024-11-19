@@ -43,6 +43,7 @@ def load_images(folder_path: str) -> List[Aggregation]:
                 keywords = [i.strip() for i in file.readlines()]
             qc_module = QualityControl(image_path, keywords)
         else:
+            print('miss')
             qc_module = QualityControl(image_path, [])
             with open(keyword_file, 'w') as file:
                 for kw in qc_module.keywords:
