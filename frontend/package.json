@@ -1,0 +1,43 @@
+{
+  "name": "datalabelerfrontend",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Frontend for data labeler",
+  "main": "index.js",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dzhan111/DataLabeler.git"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "crowdsourcing",
+    "react",
+    "js"
+  ],
+  "author": "groupdatalabeler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dzhan111/DataLabeler/issues"
+  },
+  "homepage": "https://github.com/dzhan111/DataLabeler#readme",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "classnames": "^2.5.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.15"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.3",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.15.0",
+    "postcss": "^8.4.49",
+    "prettier": "^3.3.3",
+    "vite": "^5.4.11"
+  }
+}

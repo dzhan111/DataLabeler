@@ -1,5 +1,9 @@
+from pathlib import Path
 from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
+
 from typing import Dict
 import os
 import random
@@ -9,6 +13,18 @@ from src.clients import WHISPER_MODEL
 
 app = FastAPI()
 
+origins = [
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware, 
+    allow_origins = origins, 
+    allow_credentials = True,
+    allow_methods=['*'],
+    allow_headers=['*']
+)
+
 # Initialize
 transcriptions = {}
 
@@ -17,15 +33,28 @@ images = load_images('data/dataset')
 
 class ImageResponse(BaseModel):
     index: int
+    api_image_url: str
     image_path: str
 
 @app.get("/generate_image", response_model=ImageResponse)
 async def generate_image():
-    """Endpoint to return a random image index and path."""
+    """Endpoint to return a random image index and its temporary URL."""
     if not images:
         raise HTTPException(status_code=404, detail="No images available")
     ind = random.randint(0, len(images) - 1)
-    return ImageResponse(index=ind, image_path=images[ind].image_path)
+    image_path = images[ind].image_path
+    return ImageResponse(
+        index=ind,
+        image_path=image_path,
+        api_image_url=f"/image/{ind}"  # A secondary endpoint to fetch the image
+    )
+
+@app.get("/image/{image_index}")
+async def serve_image(image_index: int):
+    """Endpoint to serve an image file by index."""
+    if not images or image_index < 0 or image_index >= len(images):
+        raise HTTPException(status_code=404, detail="Image not found")
+    return FileResponse(images[image_index].image_path, media_type="image/jpeg")
 
 
 @app.post("/process_audio/{ind}")
@@ -37,15 +66,15 @@ async def process_audio(ind: int, audio_file: UploadFile = File(...)):
     agg_object = images[ind]
     
     # Save uploaded audio file temporarily for transcription
-    temp_audio_path = f"temp_{audio_file.filename}"
+    temp_audio_path = f"./temp_{audio_file.filename}.webm"
     with open(temp_audio_path, "wb") as f:
         f.write(await audio_file.read())
     
     # Transcribe audio
     try:
-        result = WHISPER_MODEL.transcribe(temp_audio_path)['text']
+        result = WHISPER_MODEL.transcribe(str(Path(temp_audio_path).absolute()))['text']
     finally:
-        os.remove(temp_audio_path)  # Clean up the temp file
+        os.remove(str(Path(temp_audio_path).absolute()))
     
     # Process transcription
     agg_object.process_transcription(result)
