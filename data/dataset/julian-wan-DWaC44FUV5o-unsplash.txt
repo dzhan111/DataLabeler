@@ -1,0 +1,10 @@
+man
+woman
+masks
+glasses
+jacket
+street
+trees
+sign
+bus
+city

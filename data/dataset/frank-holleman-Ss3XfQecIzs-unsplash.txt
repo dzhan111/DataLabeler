@@ -1,0 +1,10 @@
+elephant
+shadow
+wall
+stone
+people
+ground
+texture
+color
+silhouette
+light

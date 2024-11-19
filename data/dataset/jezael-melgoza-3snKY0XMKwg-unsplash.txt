@@ -1,0 +1,10 @@
+street
+houses
+people
+baskets
+colors
+signs
+sky
+lights
+decorations
+cobblestones

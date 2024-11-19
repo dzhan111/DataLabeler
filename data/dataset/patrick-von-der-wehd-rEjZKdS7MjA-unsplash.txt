@@ -1,0 +1,10 @@
+building
+pipes
+windows
+shadows
+wall
+structure
+fence
+lights
+corners
+vents

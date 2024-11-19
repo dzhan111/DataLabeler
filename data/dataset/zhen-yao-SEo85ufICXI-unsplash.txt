@@ -1,0 +1,10 @@
+window
+wall
+mailbox
+service
+leaves
+glass
+brick
+paint
+shadow
+street

@@ -1,0 +1,10 @@
+crowd
+protest
+sign
+mask
+hat
+shirt
+hands
+voices
+faces
+banners

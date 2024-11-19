@@ -1,0 +1,10 @@
+cows
+grass
+trees
+mountains
+flowers
+sky
+meadow
+hills
+pasture
+landscape

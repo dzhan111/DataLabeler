@@ -1,0 +1,10 @@
+umbrella
+rain
+street
+light
+snow
+car
+person
+building
+pavement
+mailbox

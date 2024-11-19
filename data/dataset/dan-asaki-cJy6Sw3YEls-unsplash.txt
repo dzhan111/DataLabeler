@@ -1,0 +1,10 @@
+buildings
+city
+yacht
+road
+trees
+mountains
+towers
+rooftops
+apartments
+streets

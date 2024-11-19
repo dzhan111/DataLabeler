@@ -1,0 +1,10 @@
+mountains
+trees
+rocks
+slopes
+peaks
+landscape
+foliage
+earth
+sky
+distance

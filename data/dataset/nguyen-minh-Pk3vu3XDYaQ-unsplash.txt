@@ -1,0 +1,10 @@
+house
+bicycle
+door
+window
+sign
+wall
+roof
+shadow
+pavement
+basket

@@ -1,0 +1,10 @@
+street
+house
+trees
+leaves
+sidewalk
+sign
+pole
+garbage
+grass
+wire

@@ -1,0 +1,10 @@
+buildings
+city
+skyline
+tower
+glass
+concrete
+structure
+horizon
+rooftop
+cranes

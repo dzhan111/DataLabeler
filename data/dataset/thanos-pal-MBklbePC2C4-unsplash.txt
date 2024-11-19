@@ -1,0 +1,10 @@
+man
+flowers
+cheese
+display
+counter
+bowls
+labels
+parsley
+pig
+kitchen

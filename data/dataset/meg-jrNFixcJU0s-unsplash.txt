@@ -1,0 +1,10 @@
+door
+brick
+wall
+window
+sign
+entrance
+paint
+metal
+mesh
+pavement

@@ -1,0 +1,10 @@
+football
+helmet
+jersey
+number
+player
+team
+coach
+field
+uniform
+practice

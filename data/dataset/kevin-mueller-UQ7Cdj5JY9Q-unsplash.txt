@@ -1,0 +1,10 @@
+cliff
+ocean
+sky
+stars
+rock
+beach
+light
+water
+shore
+landscape

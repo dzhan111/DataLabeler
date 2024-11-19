@@ -1,0 +1,10 @@
+alley
+cat
+wall
+plants
+balcony
+door
+window
+light
+pavement
+shadows

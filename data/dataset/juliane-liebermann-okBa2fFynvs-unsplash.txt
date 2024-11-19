@@ -1,0 +1,10 @@
+books
+phone
+mirror
+chess
+games
+lamp
+toy
+bus
+box
+bottle

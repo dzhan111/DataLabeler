@@ -1,0 +1,10 @@
+house
+roof
+windows
+garden
+brick
+plants
+door
+chimney
+fence
+trees

@@ -1,0 +1,10 @@
+astronaut
+flag
+moon
+lander
+surface
+helmet
+boots
+rocks
+shadows
+dust

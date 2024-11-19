@@ -1,0 +1,10 @@
+locker
+light
+ceiling
+room
+door
+handle
+key
+wall
+space
+opening

@@ -1,0 +1,10 @@
+hallway
+statues
+ceiling
+arch
+bench
+wall
+door
+light
+shadow
+stone

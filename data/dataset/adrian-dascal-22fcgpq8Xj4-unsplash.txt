@@ -1,0 +1,10 @@
+man
+pyramid
+street
+buildings
+tree
+vehicle
+flag
+sign
+sidewalk
+people

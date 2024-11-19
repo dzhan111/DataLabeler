@@ -1,0 +1,10 @@
+building
+car
+man
+tree
+flowers
+stairs
+bike
+sign
+road
+window

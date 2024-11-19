@@ -1,0 +1,10 @@
+room
+table
+chair
+artwork
+laptop
+light
+floor
+wall
+window
+people

@@ -1,0 +1,10 @@
+furniture
+window
+lights
+chair
+table
+plant
+building
+wall
+ceiling
+construction

@@ -1,0 +1,10 @@
+street
+cat
+houses
+car
+trees
+lights
+balcony
+wall
+bike
+pavement

@@ -1,0 +1,10 @@
+dog
+car
+street
+sidewalk
+leash
+pole
+toy
+pavement
+truck
+building

@@ -1,0 +1,10 @@
+car
+fence
+house
+roof
+gate
+grass
+satellite
+dog
+tires
+door

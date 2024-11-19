@@ -1,0 +1,10 @@
+woman
+stroller
+tree
+building
+window
+sign
+pole
+door
+street
+cloth

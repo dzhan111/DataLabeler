@@ -1,0 +1,10 @@
+tree
+sign
+girl
+water
+fountain
+building
+road
+grass
+brick
+jeans

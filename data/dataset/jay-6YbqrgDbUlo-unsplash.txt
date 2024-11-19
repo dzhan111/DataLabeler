@@ -1,0 +1,10 @@
+lanterns
+wood
+bench
+door
+light
+sign
+colors
+shadows
+ceiling
+corridor

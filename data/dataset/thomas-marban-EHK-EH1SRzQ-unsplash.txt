@@ -1,0 +1,10 @@
+chef
+sushi
+noodles
+knife
+plate
+bowl
+table
+counter
+fish
+wasabi

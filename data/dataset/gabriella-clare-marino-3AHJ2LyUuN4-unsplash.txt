@@ -1,0 +1,10 @@
+bicycle
+person
+building
+columns
+street
+pavement
+plaza
+people
+wall
+sky

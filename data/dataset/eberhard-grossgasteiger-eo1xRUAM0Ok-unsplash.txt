@@ -1,0 +1,10 @@
+mountains
+peaks
+rocks
+valleys
+ridges
+terrain
+cliffs
+snow
+sky
+horizon

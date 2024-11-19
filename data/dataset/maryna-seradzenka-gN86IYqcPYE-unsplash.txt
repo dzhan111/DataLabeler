@@ -1,0 +1,10 @@
+house
+leaves
+balcony
+lamp
+window
+tree
+wall
+vine
+roof
+sky

@@ -1,0 +1,10 @@
+hallway
+walls
+light
+railing
+ceiling
+pattern
+darkness
+floor
+shadows
+space
