@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
 import { BASE_URL } from "../../config";
 
 const CaptionPage = ({ mturkId }) => {
@@ -9,6 +9,7 @@ const CaptionPage = ({ mturkId }) => {
   const [recordedAudio, setRecordedAudio] = useState(null);
   const [audioUrl, setAudioUrl] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
+  const [recordingDuration, setRecordingDuration] = useState(0);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -17,6 +18,7 @@ const CaptionPage = ({ mturkId }) => {
   const isFetched = useRef(false);
   const mediaRecorderRef = useRef(null);
   const audioPlayer = useRef(null);
+  const recordingIntervalRef = useRef(null);
 
   useEffect(() => {
     if (!isFetched.current) {
@@ -80,10 +82,17 @@ const CaptionPage = ({ mturkId }) => {
         const url = URL.createObjectURL(audioBlob);
         setRecordedAudio(audioBlob);
         setAudioUrl(url);
+        setRecordingDuration(0);
       };
 
       mediaRecorderRef.current.start();
       setIsRecording(true);
+      setRecordingDuration(0);
+
+      // Start timer
+      recordingIntervalRef.current = setInterval(() => {
+        setRecordingDuration(prev => prev + 1);
+      }, 1000);
     } catch (error) {
       setError("Error accessing microphone. Please check permissions.");
       console.error("Error accessing microphone:", error);
@@ -94,6 +103,11 @@ const CaptionPage = ({ mturkId }) => {
     if (mediaRecorderRef.current?.state === "recording") {
       mediaRecorderRef.current.stop();
       mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
+      
+      // Clear interval
+      if (recordingIntervalRef.current) {
+        clearInterval(recordingIntervalRef.current);
+      }
     }
     setIsRecording(false);
   };
@@ -177,14 +191,20 @@ const CaptionPage = ({ mturkId }) => {
             <h3 className="text-lg font-medium mb-2">Record Audio</h3>
             <button
               onClick={isRecording ? stopRecording : startRecording}
-              className={`px-4 py-2 rounded-md text-white font-medium
+              className={`px-4 py-2 rounded-md text-white font-medium relative
                 ${isRecording 
-                  ? 'bg-red-600 hover:bg-red-700' 
+                  ? 'bg-red-600 hover:bg-red-700 ' 
                   : 'bg-blue-600 hover:bg-blue-700'
                 } 
                 transition-colors`}
             >
               {isRecording ? "Stop Recording" : "Start Recording"}
+              {isRecording && (
+                <div className="flex items-center">
+                  <span className="animate-pulse mr-1 text-xs">●</span>
+                  <span className="text-xs">{recordingDuration}s</span>
+                </div>
+              )}
             </button>
           </div>
 
