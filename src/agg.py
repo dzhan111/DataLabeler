@@ -5,7 +5,7 @@ from typing import List
 
 client = Cerebras(
     # This is the default and can be omitted
-    api_key = os.environ.get('CEREBRAS_KEY'),
+    api_key = os.environ.get('CEREBRAS_API_KEY'),
 )
 
 class Aggregation:

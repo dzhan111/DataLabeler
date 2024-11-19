@@ -1,5 +1,6 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from pydantic import BaseModel
+from dotenv import load_dotenv
 from typing import Dict
 import os
 import random
@@ -8,6 +9,8 @@ import whisper
 from PIL import Image
 from io import BytesIO
 import base64
+
+load_dotenv('.env')
 
 app = FastAPI()
 
