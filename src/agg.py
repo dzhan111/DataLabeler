@@ -1,10 +1,10 @@
-from qc import QualityControl
-from clients import CEREBRAS_CLIENT
+from src.qc import QualityControl
+from src.clients import CEREBRAS_CLIENT
 
 class Aggregation:
-    def __init__(self, image_path):
+    def __init__(self, image_path, qc: QualityControl):
         self.image_path = image_path
-        self.qc = QualityControl(image_path, 80)
+        self.qc = qc
         self.valid_transcriptions = []
 
     def check(self) -> bool:

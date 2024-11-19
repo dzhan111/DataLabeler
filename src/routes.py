@@ -3,45 +3,17 @@ from pydantic import BaseModel
 from typing import Dict
 import os
 import random
-from agg import Aggregation
-from PIL import Image
-from clients import WHISPER_MODEL
+
+from src.image_utils import load_images
+from src.clients import WHISPER_MODEL
 
 app = FastAPI()
 
 # Initialize
-folder_path = 'data/dataset'
-images = []
 transcriptions = {}
 
-def convert_to_jpeg(image_path: str) -> str:
-    """Convert image to .jpeg format if it's a .jpg or .png."""
-    if image_path.lower().endswith(('.jpg')):
-        if os.path.exists(image_path.replace('.jpg', '.jpeg')):
-            os.remove(image_path)
-            return "removed"
-        with Image.open(image_path) as img:
-            # Create new path with .jpeg extension
-            new_image_path = image_path.rsplit('.', 1)[0] + '.jpeg'
-            img.save(new_image_path, 'JPEG')
-            os.remove(image_path)
-            return new_image_path
-        os.remove(image_path)
-    return image_path
-
 # Load images into Aggregation objects, convert them to .jpeg first if needed
-print(f"Loading images from {folder_path}...")
-for filename in os.listdir(folder_path):
-    original_image_path = os.path.join(folder_path, filename)
-    # Convert to .jpeg if it's a jpg or png
-    if not original_image_path.lower().endswith(('.jpeg')):
-        jpeg_image_path = convert_to_jpeg(original_image_path)
-        if jpeg_image_path == "removed" or not jpeg_image_path.lower().endswith('.jpeg'):
-            continue
-        images.append(Aggregation(jpeg_image_path))
-    else:
-        images.append(Aggregation(original_image_path))
-
+images = load_images('data/dataset')
 
 print(f"Loaded {len(images)} images.")
 class ImageResponse(BaseModel):

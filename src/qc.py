@@ -1,13 +1,17 @@
 import base64
-from clients import OPENAI_CLIENT
+
+from src.clients import OPENAI_CLIENT
 
 class QualityControl:
    
-    def __init__(self, image_path, threshold):
-      self.image_path = image_path
-      self.threshold = threshold
-      self.extract_keywords_from_image()
-      
+    def __init__(self, image_path, keywords, threshold = 80, kw_threshold = 2):
+        self.image_path = image_path
+        self.threshold = threshold
+        self.kw_threshold = kw_threshold
+
+        self.keywords = keywords
+        if not self.keywords:
+            self.extract_keywords_from_image()
 
     def extract_keywords_from_image(self):
         """Retrieves keywords from an image using GPT.
@@ -43,7 +47,7 @@ class QualityControl:
         )
 
         # Parse the response to get keywords
-        keywords = response.choices[0].message.content.split(', ')
+        keywords = response.choices[0].message.content.split(', ')[:10] # enforce 10
         
         self.keywords = keywords
 
@@ -73,6 +77,6 @@ class QualityControl:
         """
         if len(transcription.split(' ')) < self.threshold:
             return False
-        if self.count_keywords_in_transcription(transcription) < 2:
+        if self.count_keywords_in_transcription(transcription) < self.kw_threshold:
             return False
         return True
