@@ -1,25 +1,18 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from pydantic import BaseModel
-from dotenv import load_dotenv
 from typing import Dict
 import os
 import random
-from src.agg import Aggregation
-import whisper
+from agg import Aggregation
 from PIL import Image
-from io import BytesIO
-import base64
-
-load_dotenv('.env')
+from clients import WHISPER_MODEL
 
 app = FastAPI()
 
 # Initialize
 folder_path = 'data/dataset'
 images = []
-whisper_model = whisper.load_model("base")
 transcriptions = {}
-
 
 def convert_to_jpeg(image_path: str) -> str:
     """Convert image to .jpeg format if it's a .jpg or .png."""
@@ -80,7 +73,7 @@ async def process_audio(ind: int, audio_file: UploadFile = File(...)):
     
     # Transcribe audio
     try:
-        result = whisper_model.transcribe(temp_audio_path)['text']
+        result = WHISPER_MODEL.transcribe(temp_audio_path)['text']
     finally:
         os.remove(temp_audio_path)  # Clean up the temp file
     

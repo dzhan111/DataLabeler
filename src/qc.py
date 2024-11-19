@@ -1,6 +1,5 @@
 import base64
-from openai import OpenAI
-import os
+from clients import OPENAI_CLIENT
 
 class QualityControl:
    
@@ -21,9 +20,7 @@ class QualityControl:
         with open(self.image_path, "rb") as image_file:
             image_data = image_file.read()
 
-        client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-
-        response = client.chat.completions.create(
+        response = OPENAI_CLIENT.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
             {

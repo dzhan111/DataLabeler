@@ -1,12 +1,5 @@
-from src.qc import QualityControl
-import os
-from cerebras.cloud.sdk import Cerebras
-from typing import List
-
-client = Cerebras(
-    # This is the default and can be omitted
-    api_key = os.environ.get('CEREBRAS_API_KEY'),
-)
+from qc import QualityControl
+from clients import CEREBRAS_CLIENT
 
 class Aggregation:
     def __init__(self, image_path):
@@ -23,7 +16,7 @@ class Aggregation:
     
     def aggregate(self) -> str:
         if not self.check():
-            return ""
+            raise ValueError(f'Not enough transcriptions ({len(self.valid_transcriptions)})')
         n = len(self.valid_transcriptions)
         joined = "\n".join([f"Caption {i + 1}: {x}\n" for i, x in enumerate(self.valid_transcriptions)])
         message_prompt = f"""Your job is to combine the following {n} image captions into 1 unified description capturing all of the information in each.
@@ -31,7 +24,7 @@ class Aggregation:
         Remove phrases and words that do not make sense in the context provided by the responses. Please do not report anything else. Only return the description.
         {joined}
         Please provide the resulting description in your following message:"""
-        chat_completion = client.chat.completions.create(
+        chat_completion = CEREBRAS_CLIENT.chat.completions.create(
             messages=[
                 {
                     "role": "user",
