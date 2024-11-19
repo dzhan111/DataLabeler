@@ -12,7 +12,7 @@ Upon successful submission of the audio description, the worker receives a uniqu
 
 ![Flow Diagram](./flowchart.png)
 
-(UI mockup can be found ![here](./mockup.pdf)
+UI mockup can be found [here](./mockup.pdf)
 
 ## Major Components and Milestones
 
