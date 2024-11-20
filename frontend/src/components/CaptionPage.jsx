@@ -166,13 +166,11 @@ const CaptionPage = ({ mturkId , onReceive }) => {
         )}
 
         {image && (
-          <div className="mb-6">
-            <img
-              src={image.imageUrl}
-              alt="Task"
-              className="w-full max-w-2xl mx-auto rounded-lg shadow-md"
-            />
-          </div>
+          <img
+            src={image.imageUrl}
+            alt="Task"
+            className="w-full max-w-2xl mx-auto rounded-lg shadow-md mb-6"
+          />
         )}
 
         <div className="space-y-6">
