@@ -77,7 +77,10 @@ async def process_audio(ind: int, audio_file: UploadFile = File(...)):
         os.remove(str(Path(temp_audio_path).absolute()))
     
     # Process transcription
-    agg_object.process_transcription(result)
+    add = agg_object.process_transcription(result)
+    if add:
+        #add confirmation code to DB and return a valid code
+        pass
     if agg_object.check():
         final_transcription = agg_object.aggregate()
         transcriptions[final_transcription] = agg_object
@@ -90,3 +93,12 @@ async def process_audio(ind: int, audio_file: UploadFile = File(...)):
 async def get_transcriptions():
     """Endpoint to retrieve all final transcriptions."""
     return {key: agg_object.path for key, agg_object in transcriptions.items()}
+
+# Need endpoint to get if a confirmation code and worker_id combo is valid
+# Use this for the front-end to see if they should display a code and if not allow re-record
+# Need this for Mturk to see if they should get paid
+
+@app.get("/code", response_model=bool)
+async def is_code_valid(worker_id: int, code: int):
+    #query db to check for code
+    return False
