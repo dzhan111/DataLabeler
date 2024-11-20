@@ -154,15 +154,15 @@ const CaptionPage = ({ mturkId , onReceive }) => {
         <h2 className="text-m font-normal mb-6">Given the following image, talk about what you see in the image. Be as detailed as you choose, but be sure to talk for at least 60 seconds.</h2>
 
         {error && (
-          <div className="bg-red-50 text-red-600 p-4 rounded-md mb-4">
+          <p className="bg-red-50 text-red-600 p-4 rounded-md mb-4">
             {error}
-          </div>
+          </p>
         )}
 
         {message && (
-          <div className="bg-green-50 text-green-600 p-4 rounded-md mb-4">
+          <p className="bg-green-50 text-green-600 p-4 rounded-md mb-4">
             {message}
-          </div>
+          </p>
         )}
 
         {image && (
