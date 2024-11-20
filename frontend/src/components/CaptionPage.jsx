@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { BASE_URL } from "../../config";
 
-const CaptionPage = ({ mturkId }) => {
+const CaptionPage = ({ mturkId , onReceive}) => {
   // State management
   const [image, setImage] = useState(null);
   const [audioFile, setAudioFile] = useState(null);
@@ -129,6 +129,11 @@ const CaptionPage = ({ mturkId }) => {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setMessage(response.data.message);
+
+      //NEED CODE GENERATION
+      //NEED TO SAVE TO DATA BASE HERE
+      onReceive("BigBunny123");
+      // console.log(response.data.message)
       await fetchImage();
     } catch (error) {
       setError("Failed to process audio. Please try again.");
@@ -144,13 +149,23 @@ const CaptionPage = ({ mturkId }) => {
         <h1 className="text-2xl font-bold mb-6">MTurk ID: {mturkId}</h1>
       )}
 
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-xl font-semibold mb-6">Image Caption Task</h2>
-
-        {isLoading && (
-          <div className="text-center text-gray-600">Loading...</div>
-        )}
+      <div className="bg-white rounded-lg shadow-md p-6 items-center max-w-xxl">
+        <h2 className="text-xl font-semibold mb-6">Image Captioning Task</h2>
+        <h2 className="text-m font-normal mb-6">Given the following image, talk about what you see in the image. Be as detailed as you choose, but be sure to talk for at least 60 seconds.</h2>
         
+        
+        {error && (
+          <div className="bg-red-50 text-red-600 p-4 rounded-md mb-4">
+            {error}
+          </div>
+        )}
+
+        {message && (
+          <div className="bg-green-50 text-green-600 p-4 rounded-md mb-4">
+            {message}
+          </div>
+        )}
+
         {error && (
           <div className="bg-red-50 text-red-600 p-4 rounded-md mb-4">
             {error}
@@ -165,9 +180,9 @@ const CaptionPage = ({ mturkId }) => {
 
         {image && (
           <div className="mb-6">
-            <img 
-              src={image.imageUrl} 
-              alt="Task" 
+            <img
+              src={image.imageUrl}
+              alt="Task"
               className="w-full max-w-2xl mx-auto rounded-lg shadow-md"
             />
           </div>
@@ -192,8 +207,8 @@ const CaptionPage = ({ mturkId }) => {
             <button
               onClick={isRecording ? stopRecording : startRecording}
               className={`px-4 py-2 rounded-md text-white font-medium relative
-                ${isRecording 
-                  ? 'bg-red-600 hover:bg-red-700 ' 
+                ${isRecording
+                  ? 'bg-red-600 hover:bg-red-700 '
                   : 'bg-blue-600 hover:bg-blue-700'
                 } 
                 transition-colors`}
@@ -211,10 +226,10 @@ const CaptionPage = ({ mturkId }) => {
           {audioUrl && (
             <div>
               <h3 className="text-lg font-medium mb-2">Preview Audio</h3>
-              <audio 
-                ref={audioPlayer} 
-                controls 
-                src={audioUrl} 
+              <audio
+                ref={audioPlayer}
+                controls
+                src={audioUrl}
                 className="w-full mb-4"
               />
               <button
@@ -226,6 +241,21 @@ const CaptionPage = ({ mturkId }) => {
               >
                 Submit Audio
               </button>
+              {isLoading && (
+                <div className="text-center text-gray-600 py-4">Loading...</div>
+              )}
+
+              {error && (
+                <div className="bg-red-50 text-red-600 p-4 rounded-md mb-4 py-4">
+                  {error}
+                </div>
+              )}
+
+              {message && (
+                <div className="bg-green-50 text-green-600 p-4 rounded-md mb-4 py-4">
+                  {message}
+                </div>
+              )}
             </div>
           )}
         </div>

@@ -6,11 +6,13 @@ function InputPage({ onSubmit }) {
   const handleSubmit = () => {
     if (id.trim()) {
       onSubmit(id);
-    }
+    } 
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      <h1 className="text-4xl font-bold text-center mb-6 text-gray-800">Welcome to DataLabeler. </h1>
+      <h2 className="text-xl font-bold text-center mb-6 text-gray-500 max-w-md">We turn your words into money. Enter your MTurk ID to begin.</h2>
       <div className="w-full max-w-md bg-white shadow-md rounded-lg p-8">
         <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
           Enter MTurk ID
