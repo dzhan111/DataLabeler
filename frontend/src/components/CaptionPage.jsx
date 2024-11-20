@@ -149,101 +149,91 @@ const CaptionPage = ({ mturkId , onReceive }) => {
         <h1 className="text-2xl font-bold mb-6">MTurk ID: {mturkId}</h1>
       )}
 
-      <div className="bg-white rounded-lg shadow-md p-6 items-center max-w-xxl">
-        <h2 className="text-xl font-semibold mb-6">Image Captioning Task</h2>
-        <h2 className="text-m font-normal mb-6">Given the following image, talk about what you see in the image. Be as detailed as you choose, but be sure to talk for at least 60 seconds.</h2>
+      <div className="bg-white rounded-lg shadow-md p-6 items-center max-w-xxl space-y-6">
+        <h2 className="text-xl font-semibold">Image Captioning Task</h2>
+        <h2 className="text-m font-normal">Given the following image, talk about what you see in the image. Be as detailed as you choose, but be sure to talk for at least 60 seconds.</h2>
 
-        {error && (
-          <p className="bg-red-50 text-red-600 p-4 rounded-md mb-4">
-            {error}
-          </p>
-        )}
+        {error && <p className="bg-red-50 text-red-600 p-4 rounded-md">
+          {error}
+        </p>}
 
-        {message && (
-          <p className="bg-green-50 text-green-600 p-4 rounded-md mb-4">
-            {message}
-          </p>
-        )}
+        {message && <p className="bg-green-50 text-green-600 p-4 rounded-md">
+          {message}
+        </p>}
 
-        {image && (
-          <img
-            src={image.imageUrl}
-            alt="Task"
-            className="w-full max-w-2xl mx-auto rounded-lg shadow-md mb-6"
+        {image && <img
+          src={image.imageUrl}
+          alt="Task"
+          className="w-full max-w-2xl mx-auto rounded-lg shadow-md"
+        />}
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">Upload Audio</h3>
+          <input
+            type="file"
+            accept="audio/*"
+            onChange={handleAudioUpload}
+            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 
+                      file:px-4 file:rounded-md file:border-0 file:text-sm 
+                      file:font-semibold file:bg-blue-50 file:text-blue-700
+                      hover:file:bg-blue-100"
           />
-        )}
+        </div>
 
-        <div className="space-y-6">
-          <div>
-            <h3 className="text-lg font-medium mb-2">Upload Audio</h3>
-            <input
-              type="file"
-              accept="audio/*"
-              onChange={handleAudioUpload}
-              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 
-                       file:px-4 file:rounded-md file:border-0 file:text-sm 
-                       file:font-semibold file:bg-blue-50 file:text-blue-700
-                       hover:file:bg-blue-100"
-            />
-          </div>
+        <div>
+          <h3 className="text-lg font-medium mb-2">Record Audio</h3>
+          <button
+            onClick={isRecording ? stopRecording : startRecording}
+            className={`px-4 py-2 rounded-md text-white font-medium relative
+              ${isRecording
+                ? 'bg-red-600 hover:bg-red-700 '
+                : 'bg-blue-600 hover:bg-blue-700'
+              } 
+              transition-colors`}
+          >
+            {isRecording ? "Stop Recording" : "Start Recording"}
+            {isRecording && (
+              <div className="flex items-center">
+                <span className="animate-pulse mr-1 text-xs">●</span>
+                <span className="text-xs">{recordingDuration}s</span>
+              </div>
+            )}
+          </button>
+        </div>
 
-          <div>
-            <h3 className="text-lg font-medium mb-2">Record Audio</h3>
-            <button
-              onClick={isRecording ? stopRecording : startRecording}
-              className={`px-4 py-2 rounded-md text-white font-medium relative
-                ${isRecording
-                  ? 'bg-red-600 hover:bg-red-700 '
-                  : 'bg-blue-600 hover:bg-blue-700'
-                } 
-                transition-colors`}
-            >
-              {isRecording ? "Stop Recording" : "Start Recording"}
-              {isRecording && (
-                <div className="flex items-center">
-                  <span className="animate-pulse mr-1 text-xs">●</span>
-                  <span className="text-xs">{recordingDuration}s</span>
-                </div>
-              )}
-            </button>
-          </div>
+        {audioUrl && <div>
+          <h3 className="text-lg font-medium mb-2">Preview Audio</h3>
+          <audio
+            ref={audioPlayer}
+            controls
+            src={audioUrl}
+            className="w-full mb-4"
+          />
+          <button
+            onClick={() => submitAudio(audioFile || recordedAudio)}
+            disabled={isLoading}
+            className="px-4 py-2 bg-blue-600 text-white rounded-md
+                      hover:bg-blue-700 transition-colors
+                      disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Submit Audio
+          </button>
+          {isLoading && (
+            <div className="text-center text-gray-600 py-4">Loading...</div>
+          )}
 
-          {audioUrl && (
-            <div>
-              <h3 className="text-lg font-medium mb-2">Preview Audio</h3>
-              <audio
-                ref={audioPlayer}
-                controls
-                src={audioUrl}
-                className="w-full mb-4"
-              />
-              <button
-                onClick={() => submitAudio(audioFile || recordedAudio)}
-                disabled={isLoading}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md
-                         hover:bg-blue-700 transition-colors
-                         disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Submit Audio
-              </button>
-              {isLoading && (
-                <div className="text-center text-gray-600 py-4">Loading...</div>
-              )}
-
-              {error && (
-                <div className="bg-red-50 text-red-600 p-4 rounded-md mb-4 py-4">
-                  {error}
-                </div>
-              )}
-
-              {message && (
-                <div className="bg-green-50 text-green-600 p-4 rounded-md mb-4 py-4">
-                  {message}
-                </div>
-              )}
+          {error && (
+            <div className="bg-red-50 text-red-600 p-4 rounded-md mb-4 py-4">
+              {error}
             </div>
           )}
-        </div>
+
+          {message && (
+            <div className="bg-green-50 text-green-600 p-4 rounded-md mb-4 py-4">
+              {message}
+            </div>
+          )}
+        </div>}
       </div>
     </div>
   );
