@@ -5,18 +5,17 @@ import InputPage from "./components/InputPage";
 import InstructionPage from "./components/InstructionPage";
 
 function App() {
-
   const [currentPage, setCurrentPage] = useState(0);
+
   const [mturkId, setMturkId] = useState('');
   const [confirmationCode, setConfirmationCode] = useState('');
 
   const nextPage = () => setCurrentPage((prev) => {
     if (prev == 3) {
       return 1; // start a new image captioning task
-    } else {
-      prev = prev + 1
-      return prev ;
     }
+    prev = prev + 1
+    return prev ;
   });
 
   const stopTasks = () => {
@@ -26,14 +25,23 @@ function App() {
   const renderPage = () => {
     switch (currentPage) {
       case 0:
-        return <InputPage onSubmit={(id) => { setMturkId(id); nextPage(); }} />;
+        return <InputPage onSubmit={(id) => { 
+          setMturkId(id); 
+          nextPage(); 
+        }} />;
       case 1:
-        return <InstructionPage startTask={() => {nextPage();}} exit={stopTasks}/>
+        return <InstructionPage startTask={nextPage} exit={stopTasks}/>
       case 2:
-        return <CaptionPage mturkId={mturkId} onReceive={(code) => { setConfirmationCode(code); nextPage(); }} />;
+        return <CaptionPage mturkId={mturkId} onReceive={(code) => { 
+          setConfirmationCode(code); 
+          nextPage(); 
+        }} />;
       case 3:
-        // return <ConfirmationPage confirmationCode={confirmationCode} whenFinished={nextPage()} />;
-        return <ConfirmationPage confirmationCode={confirmationCode} moreTasks={nextPage} exit={stopTasks}/>;
+        return <ConfirmationPage 
+          confirmationCode={confirmationCode} 
+          moreTasks={nextPage} 
+          exit={stopTasks}
+        />;
       default:
         return null;
     }
