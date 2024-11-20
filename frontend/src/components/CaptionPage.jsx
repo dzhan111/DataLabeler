@@ -5,14 +5,17 @@ import { BASE_URL } from "../../config";
 const CaptionPage = ({ mturkId , onReceive }) => {
   // State management
   const [image, setImage] = useState(null);
+  
+  const [usingRecorded, setUsingRecorded] = useState(true);
   const [audioFile, setAudioFile] = useState(null);
   const [recordedAudio, setRecordedAudio] = useState(null);
   const [audioUrl, setAudioUrl] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
   const [recordingDuration, setRecordingDuration] = useState(0);
+  
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   // Refs
   const isFetched = useRef(false);
@@ -159,20 +162,25 @@ const CaptionPage = ({ mturkId , onReceive }) => {
           className="w-full max-w-2xl mx-auto rounded-lg shadow-md"
         />}
 
-        <div>
-          <h3 className="text-lg font-medium mb-2">Upload Audio</h3>
-          <input
-            type="file"
-            accept="audio/*"
-            onChange={handleAudioUpload}
-            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 
-                      file:px-4 file:rounded-md file:border-0 file:text-sm 
-                      file:font-semibold file:bg-blue-50 file:text-blue-700
-                      hover:file:bg-blue-100"
-          />
-        </div>
+        {usingRecorded ? <div>
+          <button className='rounded-l-md px-4 py-2 bg-blue-600 text-white'>Record Audio</button>
+          <button 
+            className='rounded-r-md bg-blue-50 py-2 px-4 hover:bg-blue-100'
+            onClick={() => {setUsingRecorded(false)}}
+          >
+            Upload Audio
+          </button>
+        </div> : <div>
+          <button 
+            className='rounded-l-md bg-blue-50 py-2 px-4 hover:bg-blue-100'
+            onClick={() => {setUsingRecorded(true)}}
+          >
+            Record Audio
+          </button>
+          <button className='rounded-r-md px-4 py-2 bg-blue-600 text-white'>Upload Audio</button>
+        </div>}
 
-        <div>
+        {usingRecorded ? <div>
           <h3 className="text-lg font-medium mb-2">Record Audio</h3>
           <button
             onClick={isRecording ? stopRecording : startRecording}
@@ -192,6 +200,19 @@ const CaptionPage = ({ mturkId , onReceive }) => {
             )}
           </button>
         </div>
+        :
+        <div>
+          <h3 className="text-lg font-medium mb-2">Upload Audio</h3>
+          <input
+            type="file"
+            accept="audio/*"
+            onChange={handleAudioUpload}
+            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 
+                      file:px-4 file:rounded-md file:border-0 
+                      file:font-semibold file:bg-blue-50 file:text-blue-700
+                      hover:file:bg-blue-100"
+          />
+        </div>}
 
         {audioUrl && <div>
           <h3 className="text-lg font-medium mb-2">Preview Audio</h3>
@@ -202,7 +223,7 @@ const CaptionPage = ({ mturkId , onReceive }) => {
             className="w-full mb-4"
           />
           <button
-            onClick={() => submitAudio(audioFile || recordedAudio)}
+            onClick={() => submitAudio(usingRecorded ? recordedAudio : audioFile)}
             disabled={isLoading}
             className="px-4 py-2 bg-blue-600 text-white rounded-md
                       hover:bg-blue-700 transition-colors
