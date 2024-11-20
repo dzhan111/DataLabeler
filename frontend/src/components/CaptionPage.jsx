@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { BASE_URL } from "../../config";
 
-const CaptionPage = ({ mturkId , onReceive}) => {
+const CaptionPage = ({ mturkId , onReceive }) => {
   // State management
   const [image, setImage] = useState(null);
   const [audioFile, setAudioFile] = useState(null);
@@ -152,19 +152,6 @@ const CaptionPage = ({ mturkId , onReceive}) => {
       <div className="bg-white rounded-lg shadow-md p-6 items-center max-w-xxl">
         <h2 className="text-xl font-semibold mb-6">Image Captioning Task</h2>
         <h2 className="text-m font-normal mb-6">Given the following image, talk about what you see in the image. Be as detailed as you choose, but be sure to talk for at least 60 seconds.</h2>
-        
-        
-        {error && (
-          <div className="bg-red-50 text-red-600 p-4 rounded-md mb-4">
-            {error}
-          </div>
-        )}
-
-        {message && (
-          <div className="bg-green-50 text-green-600 p-4 rounded-md mb-4">
-            {message}
-          </div>
-        )}
 
         {error && (
           <div className="bg-red-50 text-red-600 p-4 rounded-md mb-4">
