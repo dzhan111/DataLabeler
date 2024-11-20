@@ -1,4 +1,4 @@
-function InstructionPage({ startTask, exit }) {
+function InstructionPage({ startTask }) {
   return (
     <div className="max-w-2xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-md text-gray-800">
       <h1 className="text-2xl font-bold text-center mb-6 text-blue-600">
@@ -28,12 +28,6 @@ function InstructionPage({ startTask, exit }) {
           className="px-6 py-3 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition duration-200"
         >
           Start Task
-        </button>
-        <button
-          onClick={exit}
-          className="px-6 py-3 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700 transition duration-200"
-        >
-          Exit
         </button>
       </div>
     </div>

@@ -15,12 +15,8 @@ function App() {
       return 1; // start a new image captioning task
     }
     prev = prev + 1
-    return prev ;
+    return prev;
   });
-
-  const stopTasks = () => {
-    setCurrentPage(0)
-  }
 
   const renderPage = () => {
     switch (currentPage) {
@@ -30,7 +26,7 @@ function App() {
           nextPage(); 
         }} />;
       case 1:
-        return <InstructionPage startTask={nextPage} exit={stopTasks}/>
+        return <InstructionPage startTask={nextPage}/>
       case 2:
         return <CaptionPage mturkId={mturkId} onReceive={(code) => { 
           setConfirmationCode(code); 
@@ -39,8 +35,7 @@ function App() {
       case 3:
         return <ConfirmationPage 
           confirmationCode={confirmationCode} 
-          moreTasks={nextPage} 
-          exit={stopTasks}
+          moreTasks={nextPage}
         />;
       default:
         return null;
