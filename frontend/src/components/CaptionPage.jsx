@@ -153,14 +153,6 @@ const CaptionPage = ({ mturkId , onReceive }) => {
         <h2 className="text-xl font-semibold">Image Captioning Task</h2>
         <h2 className="text-m font-normal">Given the following image, talk about what you see in the image. Be as detailed as you choose, but be sure to talk for at least 60 seconds.</h2>
 
-        {error && <p className="bg-red-50 text-red-600 p-4 rounded-md">
-          {error}
-        </p>}
-
-        {message && <p className="bg-green-50 text-green-600 p-4 rounded-md">
-          {message}
-        </p>}
-
         {image && <img
           src={image.imageUrl}
           alt="Task"
@@ -218,22 +210,15 @@ const CaptionPage = ({ mturkId , onReceive }) => {
           >
             Submit Audio
           </button>
-          {isLoading && (
-            <div className="text-center text-gray-600 py-4">Loading...</div>
-          )}
-
-          {error && (
-            <div className="bg-red-50 text-red-600 p-4 rounded-md mb-4 py-4">
-              {error}
-            </div>
-          )}
-
-          {message && (
-            <div className="bg-green-50 text-green-600 p-4 rounded-md mb-4 py-4">
-              {message}
-            </div>
-          )}
         </div>}
+
+        {error && <p className="bg-red-50 text-red-600 p-4 rounded-md">
+          {error}
+        </p>}
+
+        {message && <p className="bg-green-50 text-green-600 p-4 rounded-md">
+          {message}
+        </p>}
       </div>
     </div>
   );
