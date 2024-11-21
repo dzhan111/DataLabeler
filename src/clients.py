@@ -25,7 +25,7 @@ match os.environ.get('ENV_TYPE'):
     case "test":
         WHISPER_MODEL = whisper.load_model('tiny.en')
     case _:
-        WHISPER_MODEL = whisper.load_model('base.en')
+        WHISPER_MODEL = whisper.load_model('tiny.en')
 
 MEGA_CLIENT = Mega().login(
     os.environ.get('MEGA_USER'),
