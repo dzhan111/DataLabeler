@@ -14,7 +14,6 @@ const CaptionPage = ({ mturkId , onReceive }) => {
   const [recordingDuration, setRecordingDuration] = useState(0);
   
   const [error, setError] = useState(null);
-  const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   // Refs
@@ -43,15 +42,17 @@ const CaptionPage = ({ mturkId , onReceive }) => {
     setIsLoading(true);
     setError(null);
     try {
-      const metadataResponse = await axios.get(`${BASE_URL}/generate_image`);
-      const { index, image_path, api_image_url } = metadataResponse.data;
+      const metadataResponse = await axios.get(`${BASE_URL}/get_image_task`, 
+        { params: { mturkid: mturkId } }
+      );
+      const { image_id } = metadataResponse.data;
 
-      const imageResponse = await axios.get(`${BASE_URL}${api_image_url}`, {
+      const imageResponse = await axios.get(`${BASE_URL}/get_image/${image_id}`, {
         responseType: "blob",
       });
       const imageUrl = URL.createObjectURL(imageResponse.data);
 
-      setImage({ index, image_path, imageUrl });
+      setImage({ image_id, imageUrl });
     } catch (error) {
       setError("Failed to fetch image. Please try again.");
       console.error("Error fetching image:", error);
@@ -128,16 +129,20 @@ const CaptionPage = ({ mturkId , onReceive }) => {
     formData.append("audio_file", audio);
 
     try {
-      const response = await axios.post(`${BASE_URL}/process_audio/${image.index}`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+      const response = await axios.post(
+        `${BASE_URL}/process_audio/${image.image_id}`, 
+        formData, {
+          params: {mturkid: mturkId},
+          headers: { "Content-Type": "multipart/form-data" },
       });
-      setMessage(response.data.message);
 
-      //NEED CODE GENERATION
-      //NEED TO SAVE TO DATA BASE HERE
-      onReceive("BigBunny123");
-      // console.log(response.data.message)
-      await fetchImage();
+      console.log(response);
+
+      if (response.data.accepted) {
+        onReceive(response.data.payload);
+      } else {
+        setError(response.data.payload);
+      }
     } catch (error) {
       setError("Failed to process audio. Please try again.");
       console.error("Error processing audio:", error);
@@ -235,10 +240,6 @@ const CaptionPage = ({ mturkId , onReceive }) => {
 
         {error && <p className="bg-red-50 text-red-600 p-4 rounded-md">
           {error}
-        </p>}
-
-        {message && <p className="bg-green-50 text-green-600 p-4 rounded-md">
-          {message}
         </p>}
       </div>
     </div>
