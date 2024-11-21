@@ -93,11 +93,3 @@ async def process_audio(ind: int, audio_file: UploadFile = File(...)):
 async def get_transcriptions():
     """Endpoint to retrieve all final transcriptions."""
     return {key: agg_object.path for key, agg_object in transcriptions.items()}
-
-# Need endpoint to get if a confirmation code and worker_id combo is valid
-# Use this for the front-end to see if they should display a code and if not allow re-record
-# Need this for Mturk to see if they should get paid
-
-def is_code_valid(worker_id: int, code: int):
-    #query db to check for code
-    return False
