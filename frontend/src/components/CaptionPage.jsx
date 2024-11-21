@@ -1,5 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import { FaStopCircle } from "react-icons/fa";
+import { GrMicrophone } from "react-icons/gr";
+import ReactLoading from 'react-loading';
+
+
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL
 
@@ -167,11 +172,12 @@ const CaptionPage = ({ mturkId , onReceive }) => {
           alt="Task"
           className="w-full max-w-2xl mx-auto rounded-lg shadow-md"
         />}
+        {isLoading && <ReactLoading className="mx-auto max-w-xl justify-items-center py-14" type={"spinningBubbles"} color={"black"} height={'10%'} width={'10%'} />}
 
         {usingRecorded ? <div>
-          <button className='rounded-l-md px-4 py-2 bg-blue-600 text-white'>Record Audio</button>
+          <button className='rounded-l-md px-4 py-2 bg-gray-300 text-black justify-items-center'>Record Audio </button>
           <button 
-            className='rounded-r-md bg-blue-50 py-2 px-4 hover:bg-blue-100'
+            className='rounded-r-md bg-blue-50 py-2 px-4 hover:bg-gray-100'
             onClick={() => {setUsingRecorded(false)}}
           >
             Upload Audio
@@ -181,30 +187,35 @@ const CaptionPage = ({ mturkId , onReceive }) => {
             className='rounded-l-md bg-blue-50 py-2 px-4 hover:bg-blue-100'
             onClick={() => {setUsingRecorded(true)}}
           >
-            Record Audio
+            Record Audio 
+
           </button>
-          <button className='rounded-r-md px-4 py-2 bg-blue-600 text-white'>Upload Audio</button>
+          <button className='rounded-r-md px-4 py-2 bg-gray-300 text-black justify-items-center'>Upload Audio</button>
         </div>}
 
         {usingRecorded ? <div>
-          <h3 className="text-lg font-medium mb-2">Record Audio</h3>
+          <h3 className="text-lg font-medium mb-2">Record Audio </h3> 
           <button
             onClick={isRecording ? stopRecording : startRecording}
-            className={`px-4 py-2 rounded-md text-white font-medium relative
+            className={`px-4 py-2 rounded-md text-white font-medium relative 
               ${isRecording
                 ? 'bg-red-600 hover:bg-red-700 '
                 : 'bg-blue-600 hover:bg-blue-700'
               } 
               transition-colors`}
-          >
-            {isRecording ? "Stop Recording" : "Start Recording"}
-            {isRecording && (
-              <div className="flex items-center">
+          > 
+          <span className="flow-root">
+            {isRecording ? <FaStopCircle className="float-left" /> : <GrMicrophone className="float-left"/>}
+            
+          </span>
+            
+          </button>
+          {isRecording && (
+              <div className="flex size-9 float-right items-center px-6 align-left">
                 <span className="animate-pulse mr-1 text-xs">●</span>
                 <span className="text-xs">{recordingDuration}s</span>
               </div>
             )}
-          </button>
         </div>
         :
         <div>

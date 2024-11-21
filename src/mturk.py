@@ -138,6 +138,7 @@ if __name__ == "__main__":
     # # Add command-line arguments
     # parser.add_argument('hit_id', type=str, help='ID of the worker')
     # args = parser.parse_args()
-    disable_and_delete_all_hits()
-    #main()
+    # disable_and_delete_all_hits()
+    # main()
     #print([x['HITId'] for x in mturk.list_hits()['HITs']])
+    print('hi')
