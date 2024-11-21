@@ -24,4 +24,4 @@ for im_file, kw in zip(image_files, keywords):
 
     SUPABASE_CLIENT.table('images').upsert(row).execute()
 
-    MEGA_CLIENT.upload(file, dest=None, dest_filename=(row['id'] + '.jpeg'))
+    MEGA_CLIENT.upload(im_file, dest=None, dest_filename=(row['id'] + '.jpeg'))
