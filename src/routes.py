@@ -47,7 +47,7 @@ async def get_image_task(mturkid: str):
     ).execute()
 
     if not results.data:
-        return { 'image_id': None }
+        raise HTTPException(status_code=204, detail="No tasks available at this time.")
     
     return {
         'image_id': random.choice(results.data)['id']

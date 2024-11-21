@@ -1,4 +1,4 @@
 from pydantic import BaseModel
 
 class ImageTaskResponse(BaseModel):
-    image_id: str | None
+    image_id: str
