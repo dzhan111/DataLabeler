@@ -1,10 +1,33 @@
 import base64
 
-from src.clients import OPENAI_CLIENT
+from src.clients import OPENAI_CLIENT, SUPABASE_CLIENT
+
+MINIMUM_WORDS = 80
+KW_THRESHOLD = 2
+
+def passes_quality_check(caption: str, image_id: str) -> bool:
+
+    chunked_caption = {i.strip(' .,!?').lower() for i in caption.split(' ')}
+
+    if len(chunked_caption) < MINIMUM_WORDS:
+        return False
+
+    keywords = [i.lower() for i in wrapped_kws[0].split(',')]
+
+    wrapped_kws = (SUPABASE_CLIENT
+     .table('images')
+     .select('keywords')
+     .eq('id', image_id)).execute().data
+    
+    if not wrapped_kws: # no such image
+        return False
+    
+    return len(chunked_caption.intersection(keywords)) >= KW_THRESHOLD
+    
 
 class QualityControl:
    
-    def __init__(self, image_path, keywords, threshold = 80, kw_threshold = 2):
+    def __init__(self, image_path, keywords, threshold = MINIMUM_WORDS, kw_threshold = KW_THRESHOLD):
         self.image_path = image_path
         self.threshold = threshold
         self.kw_threshold = kw_threshold
