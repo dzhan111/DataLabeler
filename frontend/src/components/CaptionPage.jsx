@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { BASE_URL } from "../../config";
+
+const BASE_URL = import.meta.env.VITE_BACKEND_URL
 
 const CaptionPage = ({ mturkId , onReceive }) => {
   // State management
