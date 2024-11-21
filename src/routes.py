@@ -1,6 +1,5 @@
 from fastapi import FastAPI, File, Response, UploadFile, HTTPException
-from fastapi.responses import FileResponse, JSONResponse
-from pydantic import BaseModel
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 from typing import Dict
@@ -8,8 +7,6 @@ import os
 import uuid
 import random
 from pathlib import Path
-
-import supabase
 
 from src.agg import aggregate
 from src.image_utils import convert_to_jpeg
