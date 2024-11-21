@@ -9,7 +9,8 @@ import os
 import random
 
 from src.image_utils import load_images
-from src.clients import WHISPER_MODEL
+from src.clients import WHISPER_MODEL, SUPABASE_CLIENT
+from src.models import *
 
 app = FastAPI()
 
@@ -24,6 +25,34 @@ app.add_middleware(
     allow_methods=['*'],
     allow_headers=['*']
 )
+
+@app.get("/get_image_task", response_model=ImageTaskResponse)
+async def get_image_task(mturkid: str):
+    """Selects a random image without a finished caption and less than 3 transcriptions"""
+
+    already_completed = (SUPABASE_CLIENT
+        .table('captions')
+        .select('image_id')
+        .eq('mturkid', mturkid)
+    ).execute().data
+
+    results = (SUPABASE_CLIENT
+        .table('images')
+        .select('id')
+        .not_.in_('id', already_completed)
+        .is_('final_caption', None)
+        .lt('num_captions', 3)
+        .order('id')
+        .limit(5)
+    ).execute()
+
+    if not results.data:
+        return { 'image_id': None }
+    
+    return {
+        'image_id': random.choice(results.data)['id']
+    }
+    
 
 # Initialize
 transcriptions = {}
