@@ -5,12 +5,12 @@ from src.clients import OPENAI_CLIENT, SUPABASE_CLIENT
 MINIMUM_WORDS = 80
 KW_THRESHOLD = 2
 
-def passes_quality_check(caption: str, image_id: str) -> bool:
+def passes_quality_check(caption: str, image_id: str) -> tuple[bool, str]:
 
     chunked_caption = {i.strip(' .,!?').lower() for i in caption.split(' ')}
 
     if len(chunked_caption) < MINIMUM_WORDS:
-        return False
+        return False, "Caption is too short."
 
     keywords = [i.lower() for i in wrapped_kws[0].split(',')]
 
@@ -20,9 +20,12 @@ def passes_quality_check(caption: str, image_id: str) -> bool:
      .eq('id', image_id)).execute().data
     
     if not wrapped_kws: # no such image
-        return False
+        return False, "Image does not exist."
     
-    return len(chunked_caption.intersection(keywords)) >= KW_THRESHOLD
+    if len(chunked_caption.intersection(keywords)) < KW_THRESHOLD:
+        return False, "Caption is not sufficiently relevant."
+
+    return True, ''
     
 
 class QualityControl:
