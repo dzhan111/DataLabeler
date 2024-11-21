@@ -10,9 +10,11 @@ class Aggregation:
     def check(self) -> bool:
         return len(self.valid_transcriptions) >= 3
 
-    def process_transcription(self, transcription) -> None:
+    def process_transcription(self, transcription) -> bool:
         if self.qc.fits_quality_control(transcription):
             self.valid_transcriptions.append(transcription)
+            return True
+        return False
     
     def aggregate(self) -> str:
         if not self.check():
