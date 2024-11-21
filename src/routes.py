@@ -98,7 +98,6 @@ async def get_transcriptions():
 # Use this for the front-end to see if they should display a code and if not allow re-record
 # Need this for Mturk to see if they should get paid
 
-@app.get("/code", response_model=bool)
-async def is_code_valid(worker_id: int, code: int):
+def is_code_valid(worker_id: int, code: int):
     #query db to check for code
     return False
