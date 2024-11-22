@@ -17,7 +17,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",
-    r"^https://data-labeler\w+\.vercel\.app$"
+    "https://data-labeler-ten.vercel.app"
 ]
 
 app.add_middleware(
