@@ -37,8 +37,6 @@ class Lemonfox_Client:
                 files={'file': file}, 
                 data=data
             )
-
-            print(response)
             
             if response.ok:
                 try:
