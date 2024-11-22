@@ -11,10 +11,6 @@ from supabase import create_client, Client
 
 load_dotenv('.env', override=True)
 
-OPENAI_CLIENT = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-
-CEREBRAS_CLIENT = Cerebras(api_key = os.environ.get('CEREBRAS_API_KEY'))
-
 class Lemonfox_Client:
     URL: str = "https://api.lemonfox.ai/v1/audio/transcriptions"
 
@@ -54,6 +50,10 @@ class Lemonfox_Client:
             print('Transcript:', transcript)
 
         return transcript
+    
+OPENAI_CLIENT = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
+CEREBRAS_CLIENT = Cerebras(api_key = os.environ.get('CEREBRAS_API_KEY'))
 
 LEMONFOX_CLIENT = Lemonfox_Client(
     os.environ.get('LEMONFOX_KEY'),
