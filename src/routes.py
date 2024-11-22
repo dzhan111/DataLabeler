@@ -1,11 +1,12 @@
-from fastapi import FastAPI, File, Response, UploadFile, HTTPException
+from fastapi import FastAPI, File, Response, UploadFile, HTTPException, BackgroundTasks
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 import os
 import uuid
 import random
-from pathlib import Path
+import httpx, asyncio
+from contextlib import asynccontextmanager
 
 from src.agg import aggregate
 from src.image_utils import convert_to_jpeg
@@ -26,6 +27,22 @@ app.add_middleware(
     allow_methods=['*'],
     allow_headers=['*']
 )
+
+@asynccontextmanager
+async def lifespan():
+    """Setup background tasks"""
+    asyncio.create_task(keep_alive())
+    yield
+
+async def keep_alive():
+    """Keep the server alive"""
+    while True:
+        try:
+            async with httpx.AsyncClient() as client:
+                await client.get("https://datalabeler.onrender.com/")
+        except Exception as e:
+            print(e)
+        await asyncio.sleep(600)
 
 @app.get('/')
 async def read_root():
@@ -201,6 +218,9 @@ async def add_image(admin_key: str, new_image: UploadFile = File(...)):
 
     MEGA_CLIENT.upload(temp_path, dest=None, dest_filename=(row['id'] + '.jpeg'))
 
-    os.remove(temp_path)
+    try:
+        os.remove(temp_path)
+    except OSError as e:
+        print(e)
 
     return row['id']
