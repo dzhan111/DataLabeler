@@ -9,7 +9,7 @@ from pathlib import Path
 
 from src.agg import aggregate
 from src.image_utils import convert_to_jpeg
-from src.clients import WHISPER_MODEL, SUPABASE_CLIENT, MEGA_CLIENT
+from src.clients import LEMONFOX_CLIENT, SUPABASE_CLIENT, MEGA_CLIENT
 from src.qc import passes_quality_check, get_keywords
 
 app = FastAPI()
@@ -26,6 +26,14 @@ app.add_middleware(
     allow_methods=['*'],
     allow_headers=['*']
 )
+
+@app.get('/')
+async def read_root():
+    return JSONResponse(content={
+        "message": "Welcome to the DataLabeler API",
+        "version": "1.0",
+        "documentation": "https://datalabeler.onrender.com/docs"
+    })
 
 @app.get("/get_image_task")
 async def get_image_task(mturkid: str):
@@ -80,9 +88,9 @@ async def process_audio(image_id: str, mturkid: str, audio_file: UploadFile = Fi
     with open(temp_audio_path, "wb") as f:
         f.write(await audio_file.read())
     try:
-        caption = WHISPER_MODEL.transcribe(str(Path(temp_audio_path).absolute()))['text']
+        caption = LEMONFOX_CLIENT.transcribe(temp_audio_path)
     finally:
-        os.remove(str(Path(temp_audio_path).absolute()))
+        os.remove(temp_audio_path)
 
     # check quality
     passed, reason = passes_quality_check(caption, image_id)
