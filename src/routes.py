@@ -13,23 +13,8 @@ from src.image_utils import convert_to_jpeg
 from src.clients import LEMONFOX_CLIENT, SUPABASE_CLIENT, MEGA_CLIENT
 from src.qc import passes_quality_check, get_keywords
 
-app = FastAPI()
-
-origins = [
-    "http://localhost:3000",
-    "https://data-labeler-ten.vercel.app"
-]
-
-app.add_middleware(
-    CORSMiddleware, 
-    allow_origins = origins, 
-    allow_credentials = True,
-    allow_methods=['*'],
-    allow_headers=['*']
-)
-
 @asynccontextmanager
-async def lifespan():
+async def lifespan(app: FastAPI):
     """Setup background tasks"""
     asyncio.create_task(keep_alive())
     yield
@@ -43,6 +28,21 @@ async def keep_alive():
         except Exception as e:
             print(e)
         await asyncio.sleep(600)
+
+app = FastAPI(lifespan=lifespan)
+
+origins = [
+    "http://localhost:3000",
+    "https://data-labeler-ten.vercel.app"
+]
+
+app.add_middleware(
+    CORSMiddleware, 
+    allow_origins = origins, 
+    allow_credentials = True,
+    allow_methods=['*'],
+    allow_headers=['*']
+)
 
 @app.get('/')
 async def read_root():
