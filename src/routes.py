@@ -2,7 +2,6 @@ from fastapi import FastAPI, File, Response, UploadFile, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from typing import Dict
 import os
 import uuid
 import random
