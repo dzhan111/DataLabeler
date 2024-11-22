@@ -7,7 +7,7 @@ from supabase import create_client, Client
 
 from dotenv import load_dotenv
 
-load_dotenv('.env')
+load_dotenv('.env', override=True)
 
 OPENAI_CLIENT = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
