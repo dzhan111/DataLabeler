@@ -248,6 +248,7 @@ async def add_hit(hit_id: str, admin_key: str):
         return HTTPException(403, detail = 'Insufficient permissions to add HITs')
     async with async_lock(hit_lock):
         hit_ids.append(hit_id)
+    return HTTPException(200, detail = 'HIT added to validation list')
 
 @app.delete("/remove_hit/{hit_id}")
 async def remove_hit(hit_id: str, admin_key: str):
@@ -256,3 +257,4 @@ async def remove_hit(hit_id: str, admin_key: str):
         return HTTPException(403, detail = 'Insufficient permissions to remove HITs')
     async with async_lock(hit_lock):
         hit_ids.remove(hit_id)
+    return HTTPException(200, detail = 'HIT removed from validation list')
