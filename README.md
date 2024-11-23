@@ -1,4 +1,4 @@
-**Colorful Captioner (previously DataLabeler) Project Directory**
+**DataLabeler Project Directory**
 ------------
 
 
