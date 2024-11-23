@@ -1,15 +1,9 @@
-import argparse
-import datetime
-import boto3
-import time
-import xml.etree.ElementTree as ET
+import boto3, datetime
 from dotenv import load_dotenv
-import os
 
 load_dotenv('../.env')
 
 mturk = boto3.client('mturk', region_name='us-east-1', endpoint_url='https://mturk-requester-sandbox.us-east-1.amazonaws.com')
-
 
 for i in range(5):
     response = mturk.create_hit(
@@ -46,3 +40,33 @@ for i in range(5):
     )
 
     print(response['HIT']['HITId'])
+
+
+def disable_and_delete_all_hits():
+    try:
+        # List all HITs in your account
+        response = mturk.list_hits()
+        hits = response['HITs']
+
+        for hit in hits:
+            hit_id = hit['HITId']
+            print(f"Processing HIT: {hit_id}")
+
+            # Disable the HIT by setting its expiration date to the past
+            mturk.update_expiration_for_hit(
+                HITId=hit_id,
+                ExpireAt=datetime.datetime(2000, 1, 1)  # Expire immediately
+            )
+            print(f"HIT {hit_id} disabled (expired).")
+
+            # Delete the HIT
+            try:
+                mturk.delete_hit(HITId=hit_id)
+                print(f"HIT {hit_id} deleted successfully.")
+            except mturk.exceptions.RequestError as e:
+                for ass in mturk.list_assignments_for_hit(HITId=hit_id, AssignmentStatuses=['Submitted']):
+                    mturk.reject_assignment(AssignmentId=ass['AssignmentId'], RequesterFeedback="Invalid confirmation code.")
+                print(f"Could not delete HIT {hit_id}. Reason: {e}")
+
+    except Exception as e:
+        print(f"Error occurred: {e}")

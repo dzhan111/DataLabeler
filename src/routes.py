@@ -5,18 +5,26 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 import uuid
 import random
-import httpx, asyncio
+import httpx
+import asyncio
 from contextlib import asynccontextmanager
+from threading import Lock
 
 from src.agg import aggregate
 from src.image_utils import convert_to_jpeg
 from src.clients import LEMONFOX_CLIENT, SUPABASE_CLIENT, MEGA_CLIENT
 from src.qc import passes_quality_check, get_keywords
+from src.mturk import validate_turk_responses
+from src.alock import async_lock
+
+hit_ids = []
+hit_lock = Lock()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Setup background tasks"""
     asyncio.create_task(keep_alive())
+    asyncio.create_task(validate_turk_responses(hit_ids, hit_lock))
     yield
 
 async def keep_alive():
@@ -190,7 +198,7 @@ async def get_captioned_images():
 async def add_image(admin_key: str, new_image: UploadFile = File(...)):
     """Accepts a new image provided a valid admin key"""
 
-    if not admin_key == os.environ.get('ADMIN_IMAGE_KEY'):
+    if not admin_key == os.environ.get('ADMIN_KEY'):
         raise HTTPException(403, detail = 'Insufficient permissions to submit files')
 
     if not new_image.content_type in ['image/jpeg', 'image/png', 'image/jpg']:
@@ -224,3 +232,29 @@ async def add_image(admin_key: str, new_image: UploadFile = File(...)):
         print(e)
 
     return row['id']
+
+@app.get('/get_hits')
+async def get_hits(admin_key: str):
+    """Return the list of HITs to be validated"""
+    if admin_key != os.environ.get('ADMIN_KEY'):
+        return HTTPException(403, detail = 'Insufficient permissions to view HITs')
+    async with async_lock(hit_lock):
+        return JSONResponse(content = hit_ids)
+
+@app.put("/add_hit")
+async def add_hit(hit_id: str, admin_key: str):
+    """Add a HIT to the list of HITs to be validated"""
+    if admin_key != os.environ.get('ADMIN_KEY'):
+        return HTTPException(403, detail = 'Insufficient permissions to add HITs')
+    async with async_lock(hit_lock):
+        hit_ids.append(hit_id)
+    return HTTPException(200, detail = 'HIT added to validation list')
+
+@app.delete("/remove_hit/{hit_id}")
+async def remove_hit(hit_id: str, admin_key: str):
+    """Remove a HIT from the list of HITs to be validated"""
+    if admin_key != os.environ.get('ADMIN_KEY'):
+        return HTTPException(403, detail = 'Insufficient permissions to remove HITs')
+    async with async_lock(hit_lock):
+        hit_ids.remove(hit_id)
+    return HTTPException(200, detail = 'HIT removed from validation list')
