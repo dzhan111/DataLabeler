@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 import threading
 import asyncio
+from uuid import UUID
 
 from src.clients import SUPABASE_CLIENT, MTURK_CLIENT
 from src.alock import async_lock
@@ -21,6 +22,11 @@ async def validate_turk_responses(hit_ids: list[str], lock: threading.Lock):
         await asyncio.sleep(300)
 
 def is_code_valid(workerId, code):
+    try:
+        code = UUID(code, version=4)
+    except ValueError:
+        return False
+    
     res = (SUPABASE_CLIENT.table("verification")
            .select('*')
            .eq("code", code)
