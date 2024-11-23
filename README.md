@@ -1,5 +1,5 @@
 # **DataLabeler**
-A service using crowdsourcing to create dense image captions
+A service created for our NETS 2130 final project using crowdsourcing to create dense image captions
 
 ## Team
 
@@ -7,6 +7,12 @@ A service using crowdsourcing to create dense image captions
 - Eric (ezou626)
 - David (dzhan111)
 - Akash (akashkau1224)
+
+## Premise
+
+Users are presented with an image and asked to record an audio description for 60-90 seconds. The recorded audio is transcribed, and the resulting caption undergoes quality evaluation. High-quality captions are aggregated and stored in a database for further use.
+
+Upon successful submission of the audio description, the worker receives a confirmation code. This code can then be used to claim their reward on Amazon Mechanical Turk, ensuring fair compensation.
 
 ## How To Contribute
 
