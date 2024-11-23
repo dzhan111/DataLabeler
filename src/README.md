@@ -1,23 +1,28 @@
 # Backend
 This is a FastAPI backend to connect our frontend to the following third-party services:
 - Supabase
+- Mega.io
 - Mechanical Turk
 - OpenAI GPT-4o
 - Cerebras Llama-3.1b
 
 ## Running
-1. Install dependencies
+1. Ensure you are in the root directory of the repo and that you have Python 3.11+ installed on your machine.
+2. Install dependencies
 
-    `python -m venv venv`
+    1. `python -m venv venv`
 
-    Linux/Mac: `. venv/bin/activate`
+    2. Activate environment: 
+        - **Linux/Mac:** `. venv/bin/activate`
 
-    Windows (with quotes): `"venv/Scripts/activate"`
+        - **Windows (with quotes):** `"venv/Scripts/activate"`
 
-    `pip install -r requirements.txt`
+    3. `pip install -r requirements.txt`
 
-2. Run the FastAPI server
+3. Set environment variables in .env file (see [example](../.env.example)). We recommend setting ENV_TYPE to `dev`.
 
-    Non-Windows: `uvicorn src.routes:app --reload`
+4. Run the FastAPI server
 
-    Goofy Ah Windows: `python -m windows_run`
+    `python -m run`
+
+5. Done! Your backend should be located at http://localhost:8000 for the dev environment.
