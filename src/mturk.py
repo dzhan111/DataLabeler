@@ -23,7 +23,7 @@ async def validate_turk_responses(hit_ids: list[str], lock: threading.Lock):
 
 def is_code_valid(workerId, code):
     try:
-        code = UUID(code, version=4)
+        _ = UUID(code, version=4)
     except ValueError:
         return False
     
