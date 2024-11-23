@@ -1,15 +1,9 @@
-import argparse
-import datetime
 import boto3
-import time
-import xml.etree.ElementTree as ET
 from dotenv import load_dotenv
-import os
 
 load_dotenv('../.env')
 
 mturk = boto3.client('mturk', region_name='us-east-1', endpoint_url='https://mturk-requester-sandbox.us-east-1.amazonaws.com')
-
 
 for i in range(5):
     response = mturk.create_hit(
