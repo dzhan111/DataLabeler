@@ -8,6 +8,7 @@ from openai import OpenAI
 from cerebras.cloud.sdk import Cerebras
 from mega import Mega
 from supabase import create_client, Client
+import boto3
 
 load_dotenv('.env', override=True)
 
@@ -66,4 +67,10 @@ MEGA_CLIENT = Mega().login(
 SUPABASE_CLIENT: Client = create_client(
     os.environ.get('SUPABASE_URL'),
     os.environ.get('SUPABASE_ADMIN_KEY')
+)
+
+MTURK_CLIENT = mturk = boto3.client(
+    'mturk', 
+    region_name='us-east-1', 
+    endpoint_url='https://mturk-requester-sandbox.us-east-1.amazonaws.com'
 )
