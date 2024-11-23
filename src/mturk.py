@@ -51,46 +51,6 @@ def validate_assignment(assignment):
 
 def main():
     load_dotenv('../.env')
-
-    hits = []
-
-    for i in range(3):
-        response = mturk.create_hit(
-            Title = 'Colorful Captioner ' + str(i+1),
-            Description = 'Dense image captioner to create training data for multimodal LLMs',
-            Keywords = 'survey, image',
-            Reward = '0.01',
-            MaxAssignments = 50,
-            LifetimeInSeconds = 604800,
-            AssignmentDurationInSeconds = 3600,
-            Question = '''
-            <QuestionForm xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2005-10-01/QuestionForm.xsd">
-                <Overview>
-                    <Text>We are conducting a survey about social networks. Please click the link below to complete the survey. After completing the survey, return to this page and enter the unique survey code you received at the end of the survey to receive credit.</Text>
-                </Overview>
-
-                <Overview>
-                    <Text>Please click the link below to complete the survey:</Text>
-                    <Text>http://your-survey-link.com</Text>  <!-- Just use plain text URL -->
-                </Overview>        
-                <Question>
-                    <QuestionIdentifier>surveycode</QuestionIdentifier>
-                    <DisplayName>Survey Code</DisplayName>
-                    <IsRequired>true</IsRequired>
-                    <QuestionContent>
-                        <Text>Please enter the confirmation code provided at the end of the survey:</Text>
-                    </QuestionContent>
-                    <AnswerSpecification>
-                        <FreeTextAnswer/>
-                    </AnswerSpecification>
-                </Question>
-            </QuestionForm>
-            '''
-        )
-
-        hits.append(response['HIT']['HITId'])
-    print(hits)
-    time.sleep(300)
     print("POLLING!!!")
     while True:
         for hit_id in hits:
