@@ -1,7 +1,9 @@
 import boto3, datetime
 from dotenv import load_dotenv
+import requests
+import os
 
-load_dotenv('../.env')
+load_dotenv('../../.env')
 
 mturk = boto3.client('mturk', region_name='us-east-1', endpoint_url='https://mturk-requester-sandbox.us-east-1.amazonaws.com')
 
@@ -40,6 +42,19 @@ for i in range(5):
     )
 
     print(response['HIT']['HITId'])
+
+    response = requests.post(
+        'http://datalabeler.onrender.com/', 
+        params = {
+            'hit_id': response['HIT']['HITId'],
+            'admin_key': os.environ.get('ADMIN_KEY')
+        }
+    )
+
+    if response.ok:
+        print('Request sent successfully.')
+    else: 
+        print('Call failed.')
 
 
 def disable_and_delete_all_hits():
