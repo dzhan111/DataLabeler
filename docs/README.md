@@ -2,9 +2,9 @@
 NETS 2130 Final Project
 
 
-# Data Labeler: Dense Captioning Crowdsourcing Platform
+# DataLabeler: Dense Captioning Crowdsourcing Platform
 
-**Data Labeler** is a platform designed for dense image captioning using crowdsourced audio descriptions. Users are presented with an image and asked to record an audio description for 60-90 seconds. The recorded audio is processed through Whisper for transcription, and the resulting caption undergoes quality evaluation using GPT. High-quality captions are aggregated and stored in a database for further use.
+**DataLabeler** is a platform designed for dense image captioning using crowdsourced audio descriptions. Users are presented with an image and asked to record an audio description for 60-90 seconds. The recorded audio is processed through Whisper for transcription, and the resulting caption undergoes quality evaluation using GPT. High-quality captions are aggregated and stored in a database for further use.
 
 Upon successful submission of the audio description, the worker receives a unique completion code. This code can then be used by the worker to claim their reward on Amazon Mechanical Turk (MTurk), ensuring fair compensation for their efforts.
 
