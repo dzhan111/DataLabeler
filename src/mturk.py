@@ -2,8 +2,7 @@ import xml.etree.ElementTree as ET
 import threading
 import asyncio
 
-from clients import SUPABASE_CLIENT, MTURK_CLIENT
-
+from src.clients import SUPABASE_CLIENT, MTURK_CLIENT
 from src.alock import async_lock
 
 async def validate_turk_responses(hit_ids: list[str], lock: threading.Lock):
