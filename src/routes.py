@@ -73,7 +73,7 @@ async def get_image_task(mturkid: str):
     results = (SUPABASE_CLIENT
         .table('images')
         .select('id')
-        .not_.in_('id', already_completed)
+        .not_.in_('id', [i['image_id'] for i in already_completed])
         .is_('final_caption', None)
         .lt('num_captions', 3)
         .order('id')
