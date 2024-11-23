@@ -6,21 +6,23 @@ from src.clients import SUPABASE_CLIENT, MTURK_CLIENT
 from src.alock import async_lock
 
 async def validate_turk_responses(hit_ids: list[str], lock: threading.Lock):
-    copied_hit_ids = []
-    async with async_lock(lock):
-        copied_hit_ids = hit_ids.copy()
-
     while True:
+        copied_hit_ids = []
+        async with async_lock(lock):
+            copied_hit_ids = hit_ids.copy()
+
+        print(f'Running validation task on {copied_hit_ids}')
+
         for hit_id in copied_hit_ids:
             assignments = get_submitted_assignments(hit_id)
             for assignment in assignments:
                 validate_assignment(assignment)
 
-        await asyncio.sleep(600)
+        await asyncio.sleep(300)
 
 def is_code_valid(workerId, code):
     res = (SUPABASE_CLIENT.table("verification")
-           .select(1)
+           .select('*')
            .eq("code", code)
            .eq("mturkid", workerId)).execute()
     if not res:
