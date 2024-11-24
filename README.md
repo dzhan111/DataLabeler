@@ -71,7 +71,7 @@ For hosting instructions, please check out [this document](/docs/README.md).
 ### [docs/](docs/)
 - **[flowchart.png](/docs/flowdiagram.png)** : flow diagram for our application pipeline 
 - **[mockup.pdf](/docs/mockup.pdf)** : draft mockups for our frontend
-- **[README.md](/docs/README.md)** : Markdown file explaining the major components of our project. 
+- **[README.md](/docs/README.md)** : Markdown file to organize deployment/development information. 
 ### [frontend/](frontend/)
 Contains React frontend code. A detailed listing can be found [here](frontend/README.md)
 ### [src/](src/)
