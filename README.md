@@ -54,4 +54,31 @@ Please contact ezou626@seas.upenn.edu for any questions/concerns/errors, or [sub
 
 ## Documentation
 
-For a more detailed breakdown of the repo or hosting instructions, please check out [this document](/docs/README.md).
+For hosting instructions, please check out [this document](/docs/README.md).
+
+## Files and Directories
+### [assignments/](./assignments)
+- For README.mds and content used in past milestones and assignments
+### [data/](data/)
+- **[dataset/](/data/dataset)** 
+    - 43 images used in the dataset
+- **[sample_io/](/data/sample_io)**
+    - **[README.md](/data/sample_io/README.md)** : contains the sample aggregation inputs and outputs of our pipeline for 4 example images.
+    - **[image1.jpeg](/data/sample_io/image1.jpeg)** : example input
+    - **[image2.jpg](/data/sample_io/image2.jpg)** : example input
+    - **[image3.jpg](/data/sample_io/image3.jpg)** : example input
+    - **[image4.jpg](/data/sample_io/image4.jpg)** : example input
+### [docs/](docs/)
+- **[flowchart.png](/docs/flowdiagram.png)** : flow diagram for our application pipeline 
+- **[mockup.pdf](/docs/mockup.pdf)** : draft mockups for our frontend
+- **[README.md](/docs/README.md)** : Markdown file explaining the major components of our project. 
+### [frontend/](frontend/)
+Contains React frontend code. A detailed listing can be found [here](frontend/README.md)
+### [src/](src/)
+Contains FastAPI backend code. A detailed listing can be found [here](src/README.md).
+### [.env.example](.env.example)
+Template .env file
+### [.gitignore](.gitignore)
+Excludes \_\_pycache\_\_, venv, .env, and node_modules
+### [requirements.txt](requirements.txt)
+### [run.py](./run.py)
