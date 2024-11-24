@@ -54,7 +54,7 @@ Please contact ezou626@seas.upenn.edu for any questions/concerns/errors, or [sub
 
 ## Documentation
 
-For hosting instructions, please check out [this document](/docs/README.md).
+For hosting instructions, please check out [this document](/docs/README.md). For NETS 2130 milestones, please check out [this document](/assignments/README.md).
 
 ## Files and Directories
 ### [assignments/](./assignments)

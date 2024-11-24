@@ -125,7 +125,7 @@ Below is a detailed explanation of the major components of the project, followin
   - Has a built in audio recorder and timer to see how long you record
   - Feature to upload audio
   - Has audio playback feature
-  - Automatically checks if the audio is valid using QC
+  - Responds to QC result from backend
 - **[ConfirmationPage.jsx](/frontend/src/components/ConfirmationPage.jsx)**: confirms the completion of the tast
   - Shows the confirmation code to submit back into turk
   - Uses uuid4 as code template
