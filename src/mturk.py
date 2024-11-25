@@ -1,18 +1,13 @@
 import xml.etree.ElementTree as ET
-import threading
 import asyncio
 from uuid import UUID
 
 from src.clients import SUPABASE_CLIENT, MTURK_CLIENT
-from src.alock import async_lock
 
-async def validate_turk_responses(hit_ids: list[str], lock: threading.Lock):
+async def validate_turk_responses(hit_ids: list[str]):
     while True:
         copied_hit_ids = []
-        async with async_lock(lock):
-            copied_hit_ids = hit_ids.copy()
-
-        print(f'Running validation task on {copied_hit_ids}')
+        copied_hit_ids = hit_ids.copy()
 
         for hit_id in copied_hit_ids:
             assignments = get_submitted_assignments(hit_id)
@@ -56,15 +51,16 @@ def validate_assignment(assignment):
     # Find all Answer elements using the namespace
     for answer_field in root.findall('.//ns:Answer', namespace):
         question_id = answer_field.find('ns:QuestionIdentifier', namespace).text
-        if question_id == 'surveycode':
-            answer = answer_field.find('ns:FreeText', namespace).text
-            print("\n\n\nanswer: " + answer + "\n\n\n")
+        if question_id != 'surveycode':
+            continue
+        answer = answer_field.find('ns:FreeText', namespace).text
+
     if is_code_valid(assignment['WorkerId'], answer):
-        print(assignment['AssignmentId'])
         MTURK_CLIENT.approve_assignment(
             AssignmentId=assignment['AssignmentId'])
-    else:
-        MTURK_CLIENT.reject_assignment(
-            AssignmentId=assignment['AssignmentId'], 
-            RequesterFeedback="Invalid confirmation code."
-        )
+        return
+    
+    MTURK_CLIENT.reject_assignment(
+        AssignmentId=assignment['AssignmentId'], 
+        RequesterFeedback="Invalid confirmation code."
+    )

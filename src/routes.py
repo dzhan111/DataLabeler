@@ -15,16 +15,15 @@ from src.image_utils import convert_to_jpeg
 from src.clients import LEMONFOX_CLIENT, SUPABASE_CLIENT, MEGA_CLIENT
 from src.qc import passes_quality_check, get_keywords
 from src.mturk import validate_turk_responses
-from src.alock import async_lock
 
+# doesn't need lock since no awaiting between element reads
 hit_ids = []
-hit_lock = Lock()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Setup background tasks"""
     asyncio.create_task(keep_alive())
-    asyncio.create_task(validate_turk_responses(hit_ids, hit_lock))
+    asyncio.create_task(validate_turk_responses(hit_ids))
     yield
 
 async def keep_alive():
@@ -175,10 +174,12 @@ async def process_audio(image_id: str, mturkid: str, audio_file: UploadFile = Fi
                 .select('caption')
                 .eq('image_id', image_id)).execute().data
     captions = [i['caption'] for i in captions]
+
     final_caption = aggregate(captions)
-    SUPABASE_CLIENT.table('images').update({
+
+    (SUPABASE_CLIENT.table('images').update({
         "final_caption": final_caption
-    }).eq('id', image_id).execute()
+    }).eq('id', image_id)).execute()
 
     return JSONResponse(content = {
         'accepted': True,
@@ -238,16 +239,14 @@ async def get_hits(admin_key: str):
     """Return the list of HITs to be validated"""
     if admin_key != os.environ.get('ADMIN_KEY'):
         return HTTPException(403, detail = 'Insufficient permissions to view HITs')
-    async with async_lock(hit_lock):
-        return JSONResponse(content = hit_ids)
+    return JSONResponse(content = hit_ids)
 
 @app.put("/add_hit")
 async def add_hit(hit_id: str, admin_key: str):
     """Add a HIT to the list of HITs to be validated"""
     if admin_key != os.environ.get('ADMIN_KEY'):
         return HTTPException(403, detail = 'Insufficient permissions to add HITs')
-    async with async_lock(hit_lock):
-        hit_ids.append(hit_id)
+    hit_ids.append(hit_id)
     return HTTPException(200, detail = 'HIT added to validation list')
 
 @app.delete("/remove_hit/{hit_id}")
@@ -255,6 +254,5 @@ async def remove_hit(hit_id: str, admin_key: str):
     """Remove a HIT from the list of HITs to be validated"""
     if admin_key != os.environ.get('ADMIN_KEY'):
         return HTTPException(403, detail = 'Insufficient permissions to remove HITs')
-    async with async_lock(hit_lock):
-        hit_ids.remove(hit_id)
+    hit_ids.remove(hit_id)
     return HTTPException(200, detail = 'HIT removed from validation list')
